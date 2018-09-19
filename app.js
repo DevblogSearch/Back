@@ -5,10 +5,9 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-// When routes start with '/' goes to ./routes/index.js
+// 라우팅 설정.
 const indexRouter = require('./routes/index');
-// When routes start with '/user' goes to ./routes/user.js
-const usersRouter = require('./routes/users');
+const usersRouter = require('./routes/user');
 
 const app = express();
 
@@ -23,10 +22,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// 라우트가 /로 시작하면 index.js 에서 라우팅하시면 됩니다.
+// 라우트가 /로 시작하면 index.js 에서 라우팅 하시면 됩니다.
 app.use('/', indexRouter);
-// 라우트가 /user로 시작하면 user.js 에서 라우팅 하시면 됩니다.
-app.use('/users', usersRouter);
+// 라우트가 /user 로 시작하면 user.js 에서 라우팅 하시면 됩니다.
+app.use('/user', usersRouter);
 
 
 
