@@ -1,10 +1,13 @@
+// Import modules.
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
+// When routes start with '/' goes to ./routes/index.js
 const indexRouter = require('./routes/index');
+// When routes start with '/user' goes to ./routes/user.js
 const usersRouter = require('./routes/users');
 
 const app = express();
@@ -13,14 +16,19 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+// Middleware Settings. 그냥 설정이니 신경쓰지 않으셔도.
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// 라우트가 /로 시작하면 index.js 에서 라우팅하시면 됩니다.
 app.use('/', indexRouter);
+// 라우트가 /user로 시작하면 user.js 에서 라우팅 하시면 됩니다.
 app.use('/users', usersRouter);
+
+
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
