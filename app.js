@@ -5,9 +5,20 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const helmet = require('helmet');
-
+const session = require('express-session');
+const fs = require('fs');
 
 const app = express();
+
+
+// Using session
+let sessionConfig = require('./config/session_config.json');
+app.use(session({
+  secret: sessionConfig.secret,
+  resave: sessionConfig.resave,
+  saveUninitialized: sessionConfig.saveUninitialized,
+  cookie: sessionConfig.cookie
+}));
 
 // view engine setup
 // app.set('views', path.join(__dirname, 'views'));
