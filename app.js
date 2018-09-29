@@ -28,68 +28,18 @@ app.use(session({
   store: new FileStore()
 }));
 
+
+const passport = require('./lib/passport')(app);
+
 // Routing setting.
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/user');
-const authRouter = require('./routes/auth');
+const authRouter = require('./routes/auth')(passport);
+
 
 app.use('/', indexRouter);
 app.use('/user', usersRouter);
 app.use('/auth', authRouter);
-
-
-// Testing passport.
-let authData = {
-  HttpOnly: true,
-  // secure: true, // Make only in https request.
-  email: 'minho@gmail.com',
-  password: '11111',
-  nickname: 'minho',
-};
-
-const passport = require('passport')
-  , LocalStrategy = require('passport-local').Strategy;
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-passport.serializeUser((user, done) => {
-  done(null, user.email);
-});
-
-passport.deserializeUser((id, done) => {
-  done(null, authData); // id 로 찾은 데이터 값이 req.user로 담기게 됨.
-});
-
-passport.use(new LocalStrategy({
-  usernameField: 'email',
-  passwordField: 'pwd',
-  failureFlash: true
-  },
-  (username, password, done) => {
-    if (username === authData.email) {
-      if (password === authData.password) { 
-          return done(null, authData);
-      } else {
-        return done(null, false, {
-          message: 'Incorrect password.'
-        });
-      }
-    } else {
-      return done(null, false, {
-        message: 'Incorrect username.'
-      });
-    }
-  }
-));
-
-app.post('/auth/login_process',
-  passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/auth/login',
-  })
-);
-
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

@@ -1,23 +1,39 @@
 const express = require('express');
 const template = require('../lib/template.js');
 
-const router = express.Router();
+module.exports = function(passport) {
 
-router.get('/login', (req, res) => {
-  let title = 'Login';
-  let html = template.HTML(title,
-  `
-  <form action="/auth/login_process" method="post">
-    <p><input type="text" name="email" placeholder="email"></p>
-    <p>
-      <input type="password" name="pwd" placeholder="password"></input>
-    </p>
-    <p>
-      <input type="submit" value="login">
-    </p>
-  </form>
-  `);
-  res.send(html);
-});
+  const router = express.Router();
 
-module.exports = router;
+  router.get('/login', (request, response) => {
+    let title = 'WEB - login';
+    let html = template.HTML(title,
+      `
+      <form action="/auth/login_process" method="post">
+        <p><input type="text" name="email" placeholder="emain"></p>
+        <p>
+          <textarea type="password" name="pwd" placeholder="password"></textarea>
+        </p>
+        <p>
+          <input type="submit" value="login">
+        </p>
+      </form>
+      `
+    );
+    response.send(html);
+  });
+  
+  router.get('/logout', (request, response) => {
+    request.logout();
+    response.redirect('/');
+  });
+  
+  router.post('/login_process',
+    passport.authenticate(('local'), {
+      successRedirect: '/',
+      failureRedirect: '/auth/login',
+    })
+  );
+
+  return router;
+}
