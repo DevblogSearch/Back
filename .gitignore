@@ -1,5 +1,5 @@
 node_modules/
 sessions/
-config
+config/
 data/
 db.json
