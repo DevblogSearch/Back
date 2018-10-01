@@ -35,11 +35,12 @@ const passport = require('./lib/passport')(app);
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/user');
 const authRouter = require('./routes/auth')(passport);
-
+const searchRouter = require('./routes/search');
 
 app.use('/', indexRouter);
 app.use('/user', usersRouter);
 app.use('/auth', authRouter);
+app.use('/search', searchRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
