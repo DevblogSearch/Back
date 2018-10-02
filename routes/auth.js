@@ -8,12 +8,11 @@ module.exports = function(passport) {
 
   const router = express.Router();
 
-  router.get('/login', (request, response) => {
+  router.get('/login', (req, res) => {
     let title = 'WEB - login';
-    let list = template.list(request.list);
-    let html = template.HTML(title, list, `
+    let html = template.HTML(title, `
       <form action="/auth/login_process" method="post">
-        <p><input type="text" name="email" placeholder="emain"></p>
+        <p><input type="text" name="email" placeholder="email"></p>
         <p>
           <textarea type="password" name="pwd" placeholder="password"></textarea>
         </p>
@@ -22,22 +21,16 @@ module.exports = function(passport) {
         </p>
       </form>
     `, '');
-    response.send(html);
+    res.send(html);
   });
   
-  router.get('/logout', (request, response) => {
-    request.logout();
-    response.redirect('/');
-  });
-  
-  // 로그인 정보를 받았을때 어떻게 처리할껀지.
   router.post('/login_process',
-    passport.authenticate(('local'), { // 로컬 전략을 쓰겠다.
+    passport.authenticate(('local'), { 
     successRedirect: '/',
     failureRedirect: '/auth/login',
   }));
 
-  router.get('/register', (request, response) => {
+  router.get('/register', (req, res) => {
     let title = 'WEB - login';
     let html = template.HTML(title, `
       <form action="/auth/register_process" method="post">
@@ -48,11 +41,11 @@ module.exports = function(passport) {
         <p><input type="submit" value="Register"></p>
       </form>
     `, '');
-    response.send(html);
+    res.send(html);
   });
 
-  router.post('/register_process', (request, response) => {
-    let post = request.body;
+  router.post('/register_process', (req, res) => {
+    let post = req.body;
     let email = post.email;
     let pwd = post.pwd;
     let pwdComfirm = post.pwdComfirm;
@@ -74,8 +67,13 @@ module.exports = function(passport) {
 
       db.get('users').push(user).write();
 
-      request.login(user, (err) => response.redirect('/'));
+      req.login(user, (err) => res.redirect('/'));
     });
+  });
+
+  router.get('/logout', (req, res) => {
+    req.logout();
+    res.redirect('/');
   });
 
   return router;
