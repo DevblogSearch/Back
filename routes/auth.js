@@ -41,13 +41,11 @@ module.exports = function(passport) {
     let title = 'WEB - login';
     let html = template.HTML(title, `
       <form action="/auth/register_process" method="post">
-        <p><input type="text" name="email" placeholder="emain" value="minho@gmail.com"></p>
-        <p><input type="password" name="pwd" placeholder="password" value="11111"></p>
-        <p><input type="password" name="pwdConfirm" placeholder="password" value="11111"></p>
-        <p><input type='text' name="displayName" placeholder="display name" value="minho"></p>
-        <p>
-          <input type="submit" value="Register">
-        </p>
+        <p><input type="text" name="email" placeholder="emain"></p>
+        <p><input type="password" name="pwd" placeholder="password"></p>
+        <p><input type="password" name="pwdConfirm" placeholder="password"></p>
+        <p><input type='text' name="displayName" placeholder="display name"></p>
+        <p><input type="submit" value="Register"></p>
       </form>
     `, '');
     response.send(html);
@@ -61,6 +59,7 @@ module.exports = function(passport) {
     let displayName = post.displayName;
     
     if (pwd !== pwdComfirm) {
+      // TODO Login exception handling.
       // request.flash('error', 'Password must same!');
       // response.redirect('/auth/register');
     }
