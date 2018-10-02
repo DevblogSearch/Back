@@ -10,8 +10,8 @@ module.exports = function(passport) {
 
   router.get('/login', (request, response) => {
     let title = 'WEB - login';
-    let html = template.HTML(title,
-      `
+    let list = template.list(request.list);
+    let html = template.HTML(title, list, `
       <form action="/auth/login_process" method="post">
         <p><input type="text" name="email" placeholder="emain"></p>
         <p>
@@ -21,8 +21,7 @@ module.exports = function(passport) {
           <input type="submit" value="login">
         </p>
       </form>
-      `
-    );
+    `, '');
     response.send(html);
   });
   
@@ -31,15 +30,15 @@ module.exports = function(passport) {
     response.redirect('/');
   });
   
+  // 로그인 정보를 받았을때 어떻게 처리할껀지.
   router.post('/login_process',
-    passport.authenticate(('local'), {
-      successRedirect: '/',
-      failureRedirect: '/auth/login',
-    })
-  );
+    passport.authenticate(('local'), { // 로컬 전략을 쓰겠다.
+    successRedirect: '/',
+    failureRedirect: '/auth/login',
+  }));
 
   router.get('/register', (request, response) => {
-    let title = 'Login';
+    let title = 'WEB - login';
     let html = template.HTML(title, `
       <form action="/auth/register_process" method="post">
         <p><input type="text" name="email" placeholder="emain" value="minho@gmail.com"></p>
@@ -62,7 +61,8 @@ module.exports = function(passport) {
     let displayName = post.displayName;
     
     if (pwd !== pwdComfirm) {
-      // TODO Login error handling
+      // request.flash('error', 'Password must same!');
+      // response.redirect('/auth/register');
     }
 
     bcrypt.hash(pwd, 10, (err, hash) => {
