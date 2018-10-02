@@ -2,16 +2,9 @@ const express = require('express');
 var SolrNode = require('solr-node');
 const template = require('../lib/template');
 const auth = require('../lib/auth');
+const solrClient = require('../lib/solr')();
 
 const router = express.Router();
-
-var client = new SolrNode({
-      host: '127.0.0.1',
-      port: '8983',
-      core: 'naratmalssm',
-      protocol: 'http',
-      debugLevel: 'ERROR' 
-});
 
 function buildQueryString(q) {
   const qstr = `content:${q} OR title:${q}`;
@@ -25,7 +18,7 @@ router.get('/', (req, res, next) => {
   const n = req.query.n;
   var response = [];
 
-  const query = client.query()
+  const query = solrClient.query()
     .q(buildQueryString(q))
     .addParams({
       wt: "json"
@@ -33,7 +26,7 @@ router.get('/', (req, res, next) => {
     .start(start)
     .rows(n);
   console.log(query);
-  client.search(query, function(err, result) {
+  solrClient.search(query, function(err, result) {
     if (err) {
       console.log(err);
       res.status(400).end();
