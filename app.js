@@ -18,6 +18,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Using session. TODO Production 단계에서 config directory 버전관리에서 제거.
 const sessionConfig = require('./config/session_config.json');
 app.use(session({
   secret: sessionConfig.secret,
