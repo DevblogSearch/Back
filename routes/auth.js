@@ -25,11 +25,11 @@ module.exports = function(passport) {
   });
   
   router.post('/login_process',
-    passport.authenticate(('local'), { 
+    passport.authenticate(('local'), {
     successRedirect: '/',
     failureRedirect: '/auth/login',
   }));
-
+  
   router.get('/register', (req, res) => {
     let title = 'WEB - login';
     let html = template.HTML(title, `
@@ -58,13 +58,19 @@ module.exports = function(passport) {
     }
 
     bcrypt.hash(pwd, 10, (err, hash) => {
-      let user = {
-        id: shortid.generate(),
-        email: email,
-        password: hash,
-        displayName: displayName
-      };
-
+      let user = db.get('users').find({ email: email }).value();
+      if (user) {
+        user.password = hash;
+        user.displayName = displayName;
+        db.get('users').find({ id: user.id }).assign(user).write();
+      } else {
+        user = {
+          id: shortid.generate(),
+          email: email,
+          password: hash,
+          displayName: displayName
+        };
+      }
       db.get('users').push(user).write();
 
       req.login(user, (err) => res.redirect('/'));

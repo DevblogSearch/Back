@@ -1,22 +1,3 @@
 {
-  "users": [
-    {
-      "id": "KXu-PKosi",
-      "email": "minho@gmail.com",
-      "password": "$2b$10$g2g77ZleugUvBGM5CgfuEOJ7Oshl1ImAZ5uCoIgHnJarxV/0KH89G",
-      "displayName": "minho"
-    },
-    {
-      "id": "KiqsAGRe_",
-      "email": "minho@gmail.com",
-      "password": "$2b$10$mSDvPYXrsK75dLK8BHGZ5eHt0U3Fs.JVQPni9xIFlOvDG1F3jRJ4G",
-      "displayName": "minho"
-    },
-    {
-      "id": "MAWGi7NtV",
-      "email": "himan@google.com",
-      "password": "$2b$10$uIIYNHCoatA.4LUZCAX7jORxHzuQ2UREry8Y7ey7x8PI5tLrPA5ha",
-      "displayName": "himan"
-    }
-  ]
+  "users": []
 }

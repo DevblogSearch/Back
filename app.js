@@ -1,11 +1,10 @@
-// Import modules.
 const createError = require('http-errors');
 const express = require('express');
+const session = require('express-session');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const helmet = require('helmet');
-const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 
 const app = express();
@@ -18,7 +17,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Using session. TODO Production 단계에서 config directory 버전관리에서 제거.
 const sessionConfig = require('./config/session_config.json');
 app.use(session({
   secret: sessionConfig.secret,
@@ -27,7 +25,6 @@ app.use(session({
   // cookie: sessionConfig.cookie,
   store: new FileStore()
 }));
-
 
 const passport = require('./lib/passport')(app);
 
