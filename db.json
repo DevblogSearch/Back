@@ -1,3 +1,10 @@
 {
-  "users": []
+  "users": [
+    {
+      "id": "2EiJTwKu8",
+      "email": "minho1350@gmail.com",
+      "displayName": "MINHO HEO",
+      "googleId": "109896527200412649178"
+    }
+  ]
 }
