@@ -3,9 +3,9 @@ const solrClient = require('../lib/solr')();
 
 const router = express.Router();
 const documentPostCheck = [ 'url', 'content', 'title' ];
+const options = {commit: true };
 /*document result*/
 router.post('/', (req, res, next) => {
-  console.log(req.body);
   for (var elem of req.body){
     var omittedFlag = false;
     for (var key of documentPostCheck) {
@@ -18,7 +18,7 @@ router.post('/', (req, res, next) => {
     
     if(!omittedFlag) {
       //TODO change solr-client because it doesn't support update using array
-      solrClient.update({ url:elem.url, content:elem.content, title:elem.title })
+      solrClient.update({ url:elem.url, content:elem.content, title:elem.title }, options)
         .then(function(result) {
           return result;
         }).catch(function(err) {
