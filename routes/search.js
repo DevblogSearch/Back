@@ -40,15 +40,20 @@ router.get('/', (req, res, next) => {
     res.format({
       'text/html': function(){
             //TODO should be change to render function
-            res.json(response);
+            // res.json(response);
+            let searchResult = template.parseSearchResponse(response)
+            let html = template.HTML('Search Result', '', auth.StatusUI(req, res), searchResult);
+            res.send(html);
             //res.send('<p>hey</p>');
           },
       'application/json': function(){
             res.json(response);
           },
     });
+    console.log(response);
     return;
   });
+
 });
 
 module.exports = router;
