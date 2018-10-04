@@ -1,0 +1,63 @@
+header {
+    width : 100%;
+    margin-top: 30px;
+}
+
+#header_search div {
+}
+
+#content {
+    width:1100px;
+    margin: 0 auto;
+    margin-top:60px;
+    margin-left: 150px;
+    overflow:hidden;
+}
+
+#content #main {
+  float:left;
+}
+
+#content > #main > div.article {
+    border:1px solid #cccccc;
+    width:700px; height:150px;
+    margin-bottom: 20px;
+}
+
+#content #main_rank {
+  float: left;
+  display: none;
+}
+
+#content #main_rank div {
+  border:1px solid #cccccc;
+    width:300px; height: 450px;
+    margin-left: 70px;
+    margin-top:50px;
+}
+
+#area-input {
+    margin-left: 150px;
+    margin-right: 0px;
+}
+
+.input-group-addon span {
+    color: white;
+}
+
+#area-input .input-group-addon{
+    border: 1px solid white;
+}
+
+#area-input{
+    width: 700px;
+}
+
+#main{
+    padding: 2px;
+    border: 1px solid #cccccc;
+}
+
+.navigation{
+    text-align: center;
+}

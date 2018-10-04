@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title> 나랏말싸미 </title>
+
+    <!--Global Javascript-->
+    <script src="public/javascript/jquery-min.js"></script>
+    <script src="public/javascript/underscore-min.js"></script>
+    <script src="public/javascript/backbone-min.js"></script>
+    <script src="public/javascript/backbone.marionette.min.js"></script>
+    <!--END Global Javascript-->
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <link href="public/stylesheet/components-rounded.min.css" rel="stylesheet" type="text/css" />
+    <link href="public/stylesheet/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="public/stylesheet/search.min.css" rel="stylesheet" type="text/css" />
+
+
+</head>
+<body>
+
+<div class="search-page search-content-2">
+
+    <div class="search-bar ">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="input-group">
+                    <form action="/">
+                        <input type = "text" class="form-control" placeholder="검색어를 입력해주세요" value="${data.q}">
+                    </form>
+                    <span class="input-group-btn">
+                        <button class="btn blue uppercase bold">검색</button>
+                    </span>
+                </div>
+            </div>
+            <div id="login">
+                <button class="btn blue uppercase bold">로그인</button>
+                <button class="btn blue uppercase bold" style="padding: 0px;">회원가입</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-5">
+        <div class="search-container ">
+            <ul class="search-container">
+                <li class="search-item clearfix">
+                    <div class="search-content text-left">
+                        <p>자바스크립트 처음부터 배우기<p>
+                        <p>www.naver.com</p>
+                        <p>자바스크립는 어쩌구 저쩌구...</p>
+                    </div>
+                </li>
+                ${contents}
+            </ul>
+        </div>
+        <div class="search-pagination">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="public/javascript/bootstrap.js"></script>
+</body>
+</html>
