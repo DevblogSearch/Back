@@ -1,2 +1,7 @@
 node_modules/
 sessions/
+config/google_OAuth.json
+config/facebook_OAuth.json
+config/github_OAuth.json
+config/session_config.json
+.vscode
