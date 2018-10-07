@@ -6,9 +6,29 @@ const router = express.Router();
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-  let title = "나랏말싸미";
-  let body = ""
-  let html = template.HTML(title, body, auth.StatusUI(req, res));
+  let title = "나랏말싸미_main";
+  let body = `
+    <div class="content center col-sm-4 col-sm-offset-4" id="main">
+    <div id="area-logo">
+      <div>
+          <a href="#">
+              <img id="logo-img" src="/images/king_sejong.png">
+          </a>
+      </div>
+    </div>
+    <div class="input-group">
+      <form action="/search" method="GET" id="form1">
+          <input type = "text" class="form-control" placeholder="검색어를 입력하세요" style="height: 44px" autocomplete="off" maxlength="100" name="q">
+          <input type="hidden" name="start" value="0">
+          <input type="hidden" name="n" value="10">
+      </form>
+      <span class="input-group-btn">
+          <button form="form1" class="btn blue uppercase bold" style="height: 44px">검색</button>
+      </span>
+    </div>
+    </div>
+  `;
+  let html = template.HTML(title, body, auth.StatusUI(req, res),"");
   res.send(html);
 });
 
