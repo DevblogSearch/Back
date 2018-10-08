@@ -7,12 +7,17 @@ const router = express.Router();
 /* GET home page. */
 router.get('/', (req, res, next) => {
   let title = "나랏말싸미_main";
+  let header = `
+    <div id="login-main">
+    ` + auth.StatusUI(req,res) + `
+    </div>
+  `;
   let body = `
     <div class="content center col-sm-4 col-sm-offset-4" id="main">
     <div id="area-logo">
       <div>
           <a href="#">
-              <img id="logo-img" src="/images/king_sejong.png">
+              <img id="logo-img" src="/images/king_sejong.jpg">
           </a>
       </div>
     </div>
@@ -28,7 +33,7 @@ router.get('/', (req, res, next) => {
     </div>
     </div>
   `;
-  let html = template.HTML(title, body, auth.StatusUI(req, res),"");
+  let html = template.HTML(title, body, header,"");
   res.send(html);
 });
 
