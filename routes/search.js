@@ -39,35 +39,32 @@ router.get('/', (req, res, next) => {
     
     res.format({
       'text/html': function(){
-            //TODO should be change to render function
-            // res.json(response);
-            let searchResult = template.parseSearchResponse(response)
-            let header = `
-              <div class="search-bar ">
-                <div class="row">
-                    <div class="col-md-5">
-                        <div class="input-group">
-                            <form action="/">
-                                <input type = "text" class="form-control" placeholder="검색어를 입력해주세요" value="${data.q}">
-                            </form>
-                            <span class="input-group-btn">
-                                <button class="btn blue uppercase bold">검색</button>
-                            </span>
-                        </div>
-                    </div>
-                    <div id="login">
-                    ` + auth.StatusUI(req,res) + `
+        let searchResult = template.parseSearchResponse(response)
+        let header = `
+          <div class="search-bar ">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="input-group">
+                      <form action="/">
+                        <input type = "text" class="form-control" placeholder="검색어를 입력해주세요" value="${data.q}">
+                      </form>
+                      <span class="input-group-btn">
+                        <button class="btn blue uppercase bold">검색</button>
+                      </span>
                     </div>
                 </div>
+                <div id="login">
+                ` + auth.StatusUI(req,res) + `
+                </div>
             </div>
-            `;
-            let html = template.HTML('나랏말싸미 - ' + q, '', header, searchResult);
-            res.send(html);
-            //res.send('<p>hey</p>');
-          },
+          </div>
+        `;
+        let html = template.HTML('나랏말싸미 - ' + q, '', header, searchResult);
+        res.send(html);
+      },
       'application/json': function(){
-            res.json(response);
-          },
+        res.json(response);
+      },
     });
     console.log(response);
     return;
