@@ -49,7 +49,7 @@ router.get('/', (req, res, next) => {
                 <div class="row">
                   <div class="logo-container">
                     <a href="/">
-                      <img width="130px" width="55px" id="logo-img" src="/images/king_sejong.jpg" alt="logo">
+                      <img width="130px" width="55px" id="logo-img" src="/images/Chosung_on_grid_1.png" alt="logo">
                     </a>
                   </div>
                   <div class="col-md-5">
