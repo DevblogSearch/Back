@@ -14,8 +14,9 @@ function buildQueryString(q) {
 /*search result*/
 router.get('/', (req, res, next) => {
   const q = req.query.q;
-  const start = req.query.start;
   const n = req.query.n;
+  //for paging
+  const start = (req.query.start - 1) * n;
   var response = [];
 
   const query = solrClient.query()
@@ -46,7 +47,7 @@ router.get('/', (req, res, next) => {
                 <div class="col-md-5">
                     <div class="input-group">
                       <form action="/">
-                        <input type = "text" class="form-control" placeholder="검색어를 입력해주세요" value="${data.q}">
+                        <input type = "text" class="form-control" placeholder="검색어를 입력해주세요" value="${q}">
                       </form>
                       <span class="input-group-btn">
                         <button class="btn blue uppercase bold">검색</button>
