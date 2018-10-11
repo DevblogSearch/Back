@@ -13,7 +13,7 @@
 }
 
 #footer {
-    position:absolute;
+    margin-top: -40px;
     padding: 10px;
     bottom:0;
     width:100%;
@@ -23,3 +23,19 @@
 .row {
     margin : 0;
 }
+
+
+html, body{
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+  }
+  
+  section{
+    min-height: 100%;
+    padding-bottom: 40px;
+  }
+
+  .input-group{
+      width: 100%;
+  }
