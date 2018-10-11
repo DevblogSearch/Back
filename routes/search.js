@@ -47,18 +47,23 @@ router.get('/', (req, res, next) => {
             <div class="search-page search-content-2">
               <div class="search-bar ">
                 <div class="row">
-                    <div class="col-md-5">
-                        <div class="input-group">
-                            <form action="/search" method="GET" id="form1">
-                                <input id="search_word" type = "text" class="form-control" placeholder="검색어를 입력하세요" value="${q}" autocomplete="off" maxlength="100" name="q">
-                                <input id="page" type="hidden" name="start" value="1">
-                                <input type="hidden" name="n" value="10">
-                            </form>
-                            <span class="input-group-btn">
-                                <button form="form1" class="btn blue uppercase bold">검색</button>
-                            </span>
-                        </div>
+                  <div class="logo-container">
+                    <a href="/">
+                      <img width="130px" width="55px" id="logo-img" src="/images/king_sejong.jpg" alt="logo">
+                    </a>
+                  </div>
+                  <div class="col-md-5">
+                      <div class="input-group">
+                          <form action="/search" method="GET" id="form1">
+                            <input id="search_word" type = "text" class="form-control" placeholder="검색어를 입력하세요" value="${q}" autocomplete="off" maxlength="100" name="q">
+                            <input id="page" type="hidden" name="start" value="1">
+                            <input type="hidden" name="n" value="10">
+                        </form>
+                        <span class="input-group-btn">
+                            <button form="form1" class="btn blue uppercase bold">검색</button>
+                        </span>
                     </div>
+                  </div>
                     <div id="login">
                     ` + auth.StatusUI(req,res) + `
                     </div>
