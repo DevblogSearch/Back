@@ -14,8 +14,9 @@ function buildQueryString(q) {
 /*search result*/
 router.get('/', (req, res, next) => {
   const q = req.query.q;
-  const start = req.query.start;
   const n = req.query.n;
+  //for paging
+  const start = (req.query.start - 1) * n;
   var response = [];
 
   const query = solrClient.query()
@@ -41,7 +42,7 @@ router.get('/', (req, res, next) => {
       'text/html': function(){
             //TODO should be change to render function
             // res.json(response);
-            let searchResult = template.parseSearchResponse(response)
+            let searchResult = template.parseSearchResponse(response,q)
             let header = `
             <div class="search-page search-content-2">
               <div class="search-bar ">
@@ -49,7 +50,7 @@ router.get('/', (req, res, next) => {
                     <div class="col-md-5">
                         <div class="input-group">
                             <form action="/search" method="GET" id="form1">
-                                <input id="search_word" type = "text" class="form-control" placeholder="검색어를 입력하세요" value="${data.q}" autocomplete="off" maxlength="100" name="q">
+                                <input id="search_word" type = "text" class="form-control" placeholder="검색어를 입력하세요" value="${q}" autocomplete="off" maxlength="100" name="q">
                                 <input id="page" type="hidden" name="start" value="1">
                                 <input type="hidden" name="n" value="10">
                             </form>
@@ -64,14 +65,14 @@ router.get('/', (req, res, next) => {
                 </div>
               </div>
             </div>
-            `;
-            let html = template.HTML('나랏말싸미 - ' + q, '', header, searchResult);
-            res.send(html);
-            //res.send('<p>hey</p>');
-          },
+          </div>
+        `;
+        let html = template.HTML('나랏말싸미 - ' + q, '', header, searchResult);
+        res.send(html);
+      },
       'application/json': function(){
-            res.json(response);
-          },
+        res.json(response);
+      },
     });
     console.log(response);
     return;
