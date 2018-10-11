@@ -40,23 +40,30 @@ router.get('/', (req, res, next) => {
     
     res.format({
       'text/html': function(){
-        let searchResult = template.parseSearchResponse(response)
-        let header = `
-          <div class="search-bar ">
-            <div class="row">
-                <div class="col-md-5">
-                    <div class="input-group">
-                      <form action="/">
-                        <input type = "text" class="form-control" placeholder="검색어를 입력해주세요" value="${q}">
-                      </form>
-                      <span class="input-group-btn">
-                        <button class="btn blue uppercase bold">검색</button>
-                      </span>
+            //TODO should be change to render function
+            // res.json(response);
+            let searchResult = template.parseSearchResponse(response,q)
+            let header = `
+            <div class="search-page search-content-2">
+              <div class="search-bar ">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="input-group">
+                            <form action="/search" method="GET" id="form1">
+                                <input id="search_word" type = "text" class="form-control" placeholder="검색어를 입력하세요" value="${q}" autocomplete="off" maxlength="100" name="q">
+                                <input id="page" type="hidden" name="start" value="1">
+                                <input type="hidden" name="n" value="10">
+                            </form>
+                            <span class="input-group-btn">
+                                <button form="form1" class="btn blue uppercase bold">검색</button>
+                            </span>
+                        </div>
+                    </div>
+                    <div id="login">
+                    ` + auth.StatusUI(req,res) + `
                     </div>
                 </div>
-                <div id="login">
-                ` + auth.StatusUI(req,res) + `
-                </div>
+              </div>
             </div>
           </div>
         `;
