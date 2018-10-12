@@ -1,3 +1,4 @@
+
 #login {
     float: right;
     margin-right: 50px;
@@ -9,4 +10,65 @@
 }
 #main {
     margin-top: 150px;
+}
+
+#footer {
+    margin-top: -40px;
+    padding: 10px;
+    bottom:0;
+    width:100%;
+    height:40px;
+    background-color: #F2F2F2;
+}
+.row {
+    margin : 0;
+}
+
+
+html, body{
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+section{
+    min-height: 100%;
+    padding-bottom: 40px;
+}
+
+.input-group{
+    width: 100%;
+}
+
+
+#license\ header {
+    background-color: #6ba8e9;
+    margin: 0;
+    padding: 10px 0 10px 50px;
+    height: 50px;
+    color: white;
+}
+
+#oss {
+    margin-left: 50px;
+}
+dl {
+    margin-top: 50px;
+}
+dt {
+    margin-top: 30px;
+    font-size: 20px;
+    color:#000;
+}
+dd{
+    color:#888;
+}
+
+.license a {
+    text-decoration: none;
+    color: #999;
+}
+
+#license {
+    margin-left: 50px;
 }

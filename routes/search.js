@@ -14,8 +14,9 @@ function buildQueryString(q) {
 /*search result*/
 router.get('/', (req, res, next) => {
   const q = req.query.q;
-  const start = req.query.start;
   const n = req.query.n;
+  //for paging
+  const start = (req.query.start - 1) * n;
   var response = [];
 
   const query = solrClient.query()
@@ -25,6 +26,7 @@ router.get('/', (req, res, next) => {
     })
     .start(start)
     .rows(n);
+
   console.log(query);
   solrClient.search(query, function(err, result) {
     if (err) {
@@ -38,26 +40,36 @@ router.get('/', (req, res, next) => {
     }
     
     res.format({
-      'text/html': function(){
-        let searchResult = template.parseSearchResponse(response)
+      'text/html': function() {
+        let searchResult = template.parseSearchResponse(response,q)
         let header = `
-          <div class="search-bar ">
-            <div class="row">
+          <div class="search-page search-content-2">
+            <div class="search-bar ">
+              <div class="row">
+                <div class="logo-container">
+                  <a href="/">
+                    <img width="130px" width="55px" id="logo-img" src="/images/Chosung_on_grid_1.png" alt="logo">
+                  </a>
+                </div>
                 <div class="col-md-5">
-                    <div class="input-group">
-                      <form action="/">
-                        <input type = "text" class="form-control" placeholder="검색어를 입력해주세요" value="${data.q}">
-                      </form>
-                      <span class="input-group-btn">
-                        <button class="btn blue uppercase bold">검색</button>
-                      </span>
-                    </div>
+                  <div class="input-group">
+                    <form action="/search" method="GET" id="form1">
+                      <input id="search_word" type = "text" class="form-control" placeholder="검색어를 입력하세요" value="${q}" autocomplete="off" maxlength="100" name="q">
+                      <input id="page" type="hidden" name="start" value="1">
+                      <input type="hidden" name="n" value="10">
+                    </form>
+                    <span class="input-group-btn">
+                      <button form="form1" class="btn blue uppercase bold">검색</button>
+                    </span>
+                  </div>
                 </div>
                 <div id="login">
                 ` + auth.StatusUI(req,res) + `
                 </div>
+              </div>
             </div>
           </div>
+        </div>
         `;
         let html = template.HTML('나랏말싸미 - ' + q, '', header, searchResult);
         res.send(html);
