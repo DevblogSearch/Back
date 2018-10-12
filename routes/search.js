@@ -1,5 +1,5 @@
 const express = require('express');
-var SolrNode = require('solr-node');
+const SolrNode = require('solr-node');
 const template = require('../lib/template');
 const auth = require('../lib/auth');
 const solrClient = require('../lib/solr')();
@@ -34,7 +34,7 @@ router.get('/', (req, res, next) => {
       res.status(400).end();
       return;
     }
-    for (var docIdx in result.response.docs) {
+    for (let docIdx in result.response.docs) {
       const doc = result.response.docs[docIdx];
       response.push({title:doc.title, url:doc.url, content:doc.content});
     }
@@ -78,7 +78,6 @@ router.get('/', (req, res, next) => {
         res.json(response);
       },
     });
-    console.log(response);
     return;
   });
 
