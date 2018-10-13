@@ -45,7 +45,7 @@ module.exports = function(passport) {
 </form>
 <div class="hint-text small">계정이 없나요? <a href="/auth/register" class="text-success">회원가입</a></div>
 </div>
-    `, '');
+    `, '','');
     res.send(html);
   });
   
@@ -65,7 +65,7 @@ module.exports = function(passport) {
         <p><input type='text' name="displayName" placeholder="display name"></p>
         <p><input type="submit" value="Register"></p>
       </form>
-    `, '');
+    `, '','');
     res.send(html);
   });
 
