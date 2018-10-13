@@ -11,7 +11,7 @@ module.exports = function(passport) {
   router.get('/login', (req, res) => {
     let title = 'WEB - login';
     let html = template.HTML(title, `
-    <link rel="stylesheet" href="stylesheet/login.min.css" type="text/css"/>
+    <link rel="stylesheet" href="/stylesheet/login.min.css" type="text/css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="login-form">
 <form action="/auth/login_process" method="post">
