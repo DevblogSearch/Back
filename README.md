@@ -1,7 +1,7 @@
 <img width="602" alt="screen shot 2018-10-13 at 12 51 11 pm" src="https://user-images.githubusercontent.com/40487883/46901031-1a5efc80-cee7-11e8-8496-6c4b28350745.png">
 
 # 나랏말싸미
-나랏말싸미는 한국 개발자 블로그들 모음의 검색엔진 입니다.<https://github.com/sarojaba/awesome-devblog>
+나랏말싸미는 한국 개발자 블로그들 모음의 검색엔진 입니다.
 
 영어에 지친 개발자에게 한국의 앙질의 블로그를 제공해줍니다!
 
@@ -31,6 +31,8 @@ session 파일도 마찬가지로 세션 구성을 위한 본인만의 비밀키
 
 
 ### 검색 블로그 주제
+<https://github.com/sarojaba/awesome-devblog>
+
 ![tagcloud](https://user-images.githubusercontent.com/40487883/46901173-9f4b1580-cee9-11e8-8c57-94e8b4ca42b6.png)
 
 ### 아키텍쳐
