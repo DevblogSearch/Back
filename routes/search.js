@@ -5,9 +5,16 @@ const auth = require('../lib/auth');
 const solrClient = require('../lib/solr')();
 
 const router = express.Router();
-
+/*
+  qstr = `title:"${q}"~100^5.0 OR `
+  qstr += `title:"${q}"^7.0 OR `
+  qstr += `content:"${q}"^6.0 OR `
+  qstr += `content:"${q}"~100^4.0 OR `
+  qstr += `_query_:"{!edismax qf='title^2.0 content' mm='2<75%'} ${q}"`
+*/
 function buildQueryString(q) {
-  const qstr = `content:${q} OR title:${q}`;
+  qstr = `( (title:"${q}"~10 OR title:"${q}") AND (content:"${q}" OR content:"${q}"~100))^3.0`
+  qstr += `OR (content:"${q}" OR content:"${q}"~100)`
   return qstr;
 }
 
@@ -21,8 +28,11 @@ router.get('/', (req, res, next) => {
 
   const query = solrClient.query()
     .q(buildQueryString(q))
+    .hlQuery('hl=true&hl.fl=*&hl.snippets=2&hl.fragsize=100&hl.method=unified')
+    .groupQuery('group=true&group.field=title&debug=true')
     .addParams({
-      wt: "json"
+      wt: "json",
+      debug: true
     })
     .start(start)
     .rows(n);
@@ -34,9 +44,19 @@ router.get('/', (req, res, next) => {
       res.status(400).end();
       return;
     }
-    for (let docIdx in result.response.docs) {
-      const doc = result.response.docs[docIdx];
-      response.push({title:doc.title, url:doc.url, content:doc.content});
+    //collapse document by grouping title
+    //because so many same result and has different url by params or tags
+    const groups = result.grouped.title.groups;
+    console.log('result length = ' + groups.length);
+    for (let docIdx in groups) {
+      const doc = groups[docIdx].doclist.docs[0];
+      var snipset = result.highlighting[doc.url].content;
+      if (snipset === undefined) {
+          console.log(result.highlighting[doc.url]);
+          snipset=[''];
+    }
+      //trim space and remove html tags using regex
+      response.push({title:doc.title, url:doc.url, content:snipset.join().trim().replace(/(<([^>]+)>)/ig,"")});
     }
     
     res.format({
