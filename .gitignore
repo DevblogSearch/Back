@@ -5,3 +5,4 @@ config/facebook_OAuth.json
 config/github_OAuth.json
 config/session_config.json
 .vscode
+db.json
