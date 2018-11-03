@@ -1,12 +1,12 @@
 {
   "users": [
-    {
+  {
       "id": "",
       "email": "",
       "displayName": "",
       "githubId": "",
       "facebookId": "",
       "googleId": ""
-    }
+  }
   ]
 }

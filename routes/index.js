@@ -22,7 +22,7 @@ router.get('/', (req, res, next) => {
       </div>
     </div>
     <div class="input-group">
-      <form action="/search" method="GET" id="form1">
+    <form action="/search" method="GET" id="form1">
         <input type = "text" class="form-control" placeholder="검색어를 입력하세요" style="height: 44px" autocomplete="off" maxlength="100" name="q">
         <input type="hidden" name="start" value="1">
         <input type="hidden" name="n" value="10">
@@ -32,7 +32,7 @@ router.get('/', (req, res, next) => {
       </span>
     </div>
     </div>
-  `;
+    `;
   let html = template.HTML(title, body, header,"");
   res.send(html);
 });
