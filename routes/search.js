@@ -24,6 +24,7 @@ router.get('/', (req, res, next) => {
   const n = req.query.n;
   //for paging
   const start = (req.query.start - 1) * n;
+  var numFound = 0;
   var response = [];
 
   const query = solrClient.query()
@@ -47,6 +48,7 @@ router.get('/', (req, res, next) => {
     //collapse document by grouping title
     //because so many same result and has different url by params or tags
     const groups = result.grouped.title.groups;
+    numFound = result.numFound;
     console.log('result length = ' + groups.length);
     for (let docIdx in groups) {
       const doc = groups[docIdx].doclist.docs[0];
@@ -61,7 +63,7 @@ router.get('/', (req, res, next) => {
     
     res.format({
       'text/html': function() {
-        let searchResult = template.parseSearchResponse(response,q)
+        let searchResult = template.parseSearchResponse(response,q,req.query.start,numFound)
         let header = `
           <div class="search-page search-content-2">
             <div class="search-bar ">
