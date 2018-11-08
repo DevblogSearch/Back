@@ -34,12 +34,14 @@ const usersRouter = require('./routes/user');
 const authRouter = require('./routes/auth')(passport);
 const searchRouter = require('./routes/search');
 const documentRouter = require('./routes/document');
+const autocomplete = require('./routes/autocomplete');
 
 app.use('/', indexRouter);
 app.use('/user', usersRouter);
 app.use('/auth', authRouter);
 app.use('/search', searchRouter);
 app.use('/document', documentRouter);
+app.use('/autocomplete', autocomplete);
 
 
 // catch 404 and forward to error handler
