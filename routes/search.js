@@ -48,7 +48,7 @@ router.get('/', (req, res, next) => {
     //collapse document by grouping title
     //because so many same result and has different url by params or tags
     const groups = result.grouped.title.groups;
-    numFound = result.numFound;
+    numFound = result.grouped.title.matches;
     console.log('result length = ' + groups.length);
     for (let docIdx in groups) {
       const doc = groups[docIdx].doclist.docs[0];
