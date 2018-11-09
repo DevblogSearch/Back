@@ -41,6 +41,11 @@ app.use('/auth', authRouter);
 app.use('/search', searchRouter);
 app.use('/document', documentRouter);
 
+app.post('/track_pings', (req, res) => {
+  console.log("Counter added");
+  res.send();
+})
+
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
