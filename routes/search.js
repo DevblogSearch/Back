@@ -24,6 +24,7 @@ router.get('/', (req, res, next) => {
   const n = req.query.n;
   //for paging
   const start = (req.query.start - 1) * n;
+  var numFound = 0;
   var response = [];
 
   const query = solrClient.query()
@@ -47,6 +48,7 @@ router.get('/', (req, res, next) => {
     //collapse document by grouping title
     //because so many same result and has different url by params or tags
     const groups = result.grouped.title.groups;
+    numFound = result.grouped.title.matches;  // ?--- matches에 있는 숫자가 매칭된 글의 총 갯수가 맞는가. ('콤마' 검색시 실제 나오는 갯수 11개. matches는 18)
     console.log('result length = ' + groups.length);
     for (let docIdx in groups) {
       const doc = groups[docIdx].doclist.docs[0];
@@ -61,7 +63,7 @@ router.get('/', (req, res, next) => {
     
     res.format({
       'text/html': function() {
-        let searchResult = template.parseSearchResponse(response,q)
+        let searchResult = template.parseSearchResponse(response,q,req.query.start,numFound)
         let header = `
           <div class="search-page search-content-2">
             <div class="search-bar ">
@@ -74,7 +76,7 @@ router.get('/', (req, res, next) => {
                 <div class="col-md-5">
                   <div class="input-group">
                     <form action="/search" method="GET" id="form1">
-                      <input id="search_word" type = "text" class="form-control" placeholder="검색어를 입력하세요" value="${q}" autocomplete="off" maxlength="100" name="q">
+                      <input id="inputSearch" type = "text" class="form-control" placeholder="검색어를 입력하세요" value="${q}" autocomplete="off" maxlength="100" name="q">
                       <input id="page" type="hidden" name="start" value="1">
                       <input type="hidden" name="n" value="10">
                     </form>
@@ -91,7 +93,10 @@ router.get('/', (req, res, next) => {
           </div>
         </div>
         `;
-        let html = template.HTML('나랏말싸미 - ' + q, '', header, searchResult);
+        let library =` 
+          <link href="/stylesheet/search.min.css" rel="stylesheet" type="text/css" />
+        `;
+        let html = template.HTML('나랏말싸미 - ' + q, library,'', header, searchResult);
         res.send(html);
       },
       'application/json': function(){
