@@ -3,7 +3,7 @@ $(document).ready(function () {
         $("#inputSearch").autocomplete({
             source : function( req, res){
                 $.ajax({
-                    url: "http://ec2-52-78-115-199.ap-northeast-2.compute.amazonaws.com/autocomplete",
+                    url: "/autocomplete",
                     data: {
                         q: req.term
                     },
@@ -12,15 +12,21 @@ $(document).ready(function () {
                     }
                 });
             },
+            focus: function(){
+                event.preventDefault();
+            },
             open: function() {
                 $( this ).autocomplete("widget").width("323px");
                 $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
             },
             close: function() {
                 $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+            },
+            messages: {
+                noResults: '',
+                results: function(){}
             }
-
         });
     });
-    
+    $('a.ui-state-focus').parent().css("background","#eee");
 });

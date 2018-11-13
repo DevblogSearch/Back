@@ -93,7 +93,10 @@ router.get('/', (req, res, next) => {
           </div>
         </div>
         `;
-        let html = template.HTML('나랏말싸미 - ' + q, '', header, searchResult);
+        let library =` 
+          <link href="/stylesheet/search.min.css" rel="stylesheet" type="text/css" />
+        `;
+        let html = template.HTML('나랏말싸미 - ' + q, library,'', header, searchResult);
         res.send(html);
       },
       'application/json': function(){

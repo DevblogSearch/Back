@@ -113,3 +113,10 @@ dd{
   background-color: #F2F2F2;
   float: right;
 }
+
+.ui-menu-item{
+    margin: 0px;
+    padding-bottom: 5px;
+    padding-top:5px;
+    padding-left: 20px;
+}

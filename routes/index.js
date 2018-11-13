@@ -33,6 +33,9 @@ router.get('/', (req, res, next) => {
     </div>
     </div>
     `;
+  let library = `
+    <link href="/stylesheet/index.css" rel="stylesheet" type="text/css" />    
+  `;
   let html = template.HTML(title, body, header,"");
   res.send(html);
 });
