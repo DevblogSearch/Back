@@ -4,5 +4,6 @@ config/google_OAuth.json
 config/facebook_OAuth.json
 config/github_OAuth.json
 config/session_config.json
+config/db_config.json
 .vscode
-db.json
+sequelize_test.js
