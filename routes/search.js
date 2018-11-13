@@ -93,10 +93,10 @@ router.get('/', (req, res, next) => {
           </div>
         </div>
         `;
-        let library =` 
+        let local_library =` 
           <link href="/stylesheet/search.min.css" rel="stylesheet" type="text/css" />
         `;
-        let html = template.HTML('나랏말싸미 - ' + q, library,'', header, searchResult);
+        let html = template.HTML('나랏말싸미 - ' + q, local_library,'', header, searchResult);
         res.send(html);
       },
       'application/json': function(){
