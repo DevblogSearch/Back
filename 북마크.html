@@ -6,27 +6,59 @@
   <title>License</title>
 
   <link href="public/stylesheet/common.css" rel="stylesheet" type="text/css" />
+  <link href="public/stylesheet/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="aa.js"></script>
+  <style>
+    body {
+      background-color: #f2f2f2;
+    }
+  </style>
+
 </head>
 
 
 <body>
 
+
   <h1 id = "common header">
     북마크
 </h1>
-    <div class="container">
 
 
-      <div class="bookmark">
-        <div class= "bookmark_content">
+  <div class="bookmark_container">
+    <ul id="bookmark_list">
+
+      <li class="bookmark">
+        <div class="bookmark_content">
         </div>
-        <div class = "bookmark_del">
+        <div class="bookmark_del">
           <button class = "delete_button">✖</button>
         </div>
-      </div>
+      </li>
 
+      <li class="bookmark">
+        <div class="bookmark_content">
+        </div>
+        <div class="bookmark_del">
+          <button class = "delete_button">✖</button>
+        </div>
+      </li>
 
-    </div>
+      <li class="bookmark">
+        <div class="bookmark_content">
+        </div>
+        <div class="bookmark_del">
+          <button class = "delete_button">✖</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <div id="footer">
+    <a href="public/oss_license.html">오픈소스 정보</a>
+  </div>
 </body>
 
 </html>
