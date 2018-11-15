@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const helmet = require('helmet');
 const FileStore = require('session-file-store')(session);
+const db = require('./lib/db');
 
 const app = express();
 
@@ -23,7 +24,7 @@ app.use(session({
   resave: sessionConfig.resave,
   saveUninitialized: sessionConfig.saveUninitialized,
   // cookie: sessionConfig.cookie,
-  store: new FileStore()
+  // store: new FileStore()
 }));
 
 const passport = require('./lib/passport')(app);
@@ -43,10 +44,21 @@ app.use('/search', searchRouter);
 app.use('/document', documentRouter);
 app.use('/autocomplete', autocomplete);
 
-app.post('/track_pings', (req, res) => {
-  console.log("Counter added");
+app.post(('/blog'), (req, res) => {
+  db.Blog.findOrCreate({ where: {url: req.body.content } })
+    .spread((url, created) => {
+      console.log(url.get({
+        plain: true
+      }));
+      console.log('create: ', created);
+      res.send(JSON.stringify({ content: url.id }));
+    });
+});
+
+app.post('/count_pings', (req, res) => {
+  console.log('Count pings');
   res.send();
-})
+});
 
 
 // catch 404 and forward to error handler
