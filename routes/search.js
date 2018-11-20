@@ -60,20 +60,20 @@ router.get('/', (req, res, next) => {
       //trim space and remove html tags using regex
       response.push({title:doc.title, url:doc.url, content:snipset.join().trim().replace(/(<([^>]+)>)/ig,"")});
     }
-    
+
     res.format({
       'text/html': function() {
         let searchResult = template.parseSearchResponse(response,q,req.query.start,numFound)
         let header = `
           <div class="search-page search-content-2">
-            <div class="search-bar ">
+            <div class="search-bar" style="margin-bottom: 10px;">
               <div class="row">
-                <div class="logo-container">
+                <div id ="logo-container" class = "visible-lg-block visible-md-block">
                   <a href="/">
                     <img width="130px" width="55px" id="logo-img" src="/images/Chosung_on_grid_1.png" alt="logo">
                   </a>
                 </div>
-                <div class="col-md-5">
+                <div class="col-xs-11 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-0 col-lg-5 col-lg-offset-0">
                   <div class="input-group">
                     <form action="/search" method="GET" id="form1">
                       <input id="inputSearch" type = "text" class="form-control" placeholder="검색어를 입력하세요" value="${q}" autocomplete="off" maxlength="100" name="q">
@@ -85,7 +85,7 @@ router.get('/', (req, res, next) => {
                     </span>
                   </div>
                 </div>
-                <div id="login">
+                <div id="login" class = "visible-lg-block visible-md-block " >
                 ` + auth.StatusUI(req,res) + `
                 </div>
               </div>
@@ -93,7 +93,7 @@ router.get('/', (req, res, next) => {
           </div>
         </div>
         `;
-        let local_library =` 
+        let local_library =`
           <link href="/stylesheet/search.min.css" rel="stylesheet" type="text/css" />
         `;
         let html = template.HTML('나랏말싸미 - ' + q, local_library,'', header, searchResult);

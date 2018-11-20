@@ -13,11 +13,11 @@ router.get('/', (req, res, next) => {
     </div>
   `;
   let body = `
-    <div class="content center col-sm-4 col-sm-offset-4" id="main">
+    <div class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-12" id="main">
     <div id="area-logo">
       <div>
         <a href="#">
-          <img id="logo-img" src="/images/king_sejong.jpg">
+          <img id="logo-img" src="/images/king_sejong.jpg" class="img-responsive center-block">
         </a>
       </div>
     </div>
@@ -34,7 +34,7 @@ router.get('/', (req, res, next) => {
     </div>
     `;
   let local_library = `
-    <link href="/stylesheet/index.css" rel="stylesheet" type="text/css" />    
+    <link href="/stylesheet/index.css" rel="stylesheet" type="text/css" />
   `;
   let html = template.HTML(title, local_library, body, header,"");
   res.send(html);
