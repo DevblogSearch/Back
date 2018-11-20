@@ -55,9 +55,18 @@ app.post(('/blog'), (req, res) => {
     });
 });
 
+// TODO When API define blog_id
+// Why always Create new row? Just add count.
 app.post('/count_pings', (req, res) => {
   console.log('Count pings');
-  res.send();
+  console.log(req.body.url);
+
+  db.PingEvent.create({
+    blog_id: 0, // TODO req.body.blog_id
+    url: req.body.url
+  });
+
+  res.redirect(reqbody.url);
 });
 
 
