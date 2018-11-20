@@ -7,6 +7,7 @@ const logger = require('morgan');
 const helmet = require('helmet');
 const FileStore = require('session-file-store')(session);
 const db = require('./lib/db');
+const queryString = require('query-string');
 
 const app = express();
 
@@ -57,18 +58,44 @@ app.post(('/blog'), (req, res) => {
 
 // TODO When API define blog_id
 // Why always Create new row? Just add count.
-app.post('/count_pings', (req, res) => {
-  console.log('Count pings');
+app.post('/ping_events', (req, res) => {
+  console.log('Count events');
   console.log(req.body.url);
 
   db.PingEvent.create({
-    blog_id: 0, // TODO req.body.blog_id
+    blog_id: 0, // TODO replace by req.body.blog_id
     url: req.body.url
   });
 
   res.redirect(reqbody.url);
 });
 
+app.post('/like_events', (req, res) => {
+  console.log(`Like events email : ${req.query.email}`);
+
+  db.User.findOne({
+    where: { email: req.query.email }
+  }).then((user) => {
+
+    db.LikeEvent.findOne({
+      where: {user_id: user.id, url: 'http://example.com'}
+    }).then(exist => {
+      if (!exist) {
+        db.LikeEvent.create({
+          user_id: user.id,
+          url: 'http://example.com'
+        });
+      } else {
+        console.log('Like event already exist');
+      }
+    });
+
+  }).catch(err => {
+    console.log('User not Found!');
+  });
+
+  res.end('/');
+});
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
