@@ -32,14 +32,12 @@ const passport = require('./lib/passport')(app);
 
 // Routing setting.
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/user');
 const authRouter = require('./routes/auth')(passport);
 const searchRouter = require('./routes/search');
 const documentRouter = require('./routes/document');
 const autocomplete = require('./routes/autocomplete');
 
 app.use('/', indexRouter);
-app.use('/user', usersRouter);
 app.use('/auth', authRouter);
 app.use('/search', searchRouter);
 app.use('/document', documentRouter);
@@ -56,18 +54,13 @@ app.post(('/blog'), (req, res) => {
     });
 });
 
-// TODO When API define blog_id
-// Why always Create new row? Just add count.
 app.post('/ping_events', (req, res) => {
-  console.log('Count events');
-  console.log(req.body.url);
-
   db.PingEvent.create({
     blog_id: 0, // TODO replace by req.body.blog_id
-    url: req.body.url
+    url: req.query.url
   });
 
-  res.redirect(reqbody.url);
+  res.end();
 });
 
 app.post('/like_events', (req, res) => {
