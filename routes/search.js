@@ -65,6 +65,19 @@ router.get('/', (req, res, next) => {
       'text/html': function() {
         let searchResult = template.parseSearchResponse(response,q,req.query.start,numFound)
         let header = `
+          <div id="sidebar">
+            <div class="close-sidebar">
+              <button class = "close_button">✖</button>
+            </div>
+            ` + auth.StatusUI(req,res) + `
+          </div>
+          <div id="toggle-btn" class = "visible-xs-block visible-sm-block" >
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div id ="overlay"></div>
+
           <div class="search-page search-content-2">
             <div class="search-bar" style="margin-bottom: 10px;">
               <div class="row">

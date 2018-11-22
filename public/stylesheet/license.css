@@ -1,0 +1,33 @@
+body {
+  text-align: left;
+}
+
+h1 {
+  font-size: 25px;
+}
+
+
+#oss dl {
+  margin-top: 50px;
+}
+
+#oss dt {
+  margin-top: 30px;
+  font-size: 25px;
+  color: #000;
+}
+
+#oss dd {
+  color: #888;
+  margin : 0;
+  font-size: 20px;
+}
+
+#oss .license a {
+  text-decoration: none;
+  color: #999;
+}
+
+#license {
+  margin-top : 100px;
+}
