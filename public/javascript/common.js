@@ -53,14 +53,14 @@ $(document).ready(function () {
             search:function(event,ui){
                 var isSelect = $(this).attr('isSelect');
                 isSelect = (typeof isSelect === "undefined") ? 0 : isSelect;
-                if (isSelect == 1) {        
+                if (isSelect == 1) {
                     console.log('선택 된 직후이니 처리 안함.');
-                    return false;      
+                    return false;
                 }
             },
             select:function(event,ui){
                 $(this).attr('isSelect', 1);
-                setTimeout(function(obj){        
+                setTimeout(function(obj){
                     $(obj).attr('isSelect', 0);
                 }, 500, this );
                 $(this).val('');
@@ -81,14 +81,3 @@ $(document).ready(function () {
     });
     $('a.ui-state-focus').parent().css("background","#eee");
 });
-
-
-function toggleSidebar() {
-  document.getElementById('sidebar').classList.toggle('active');
-  document.getElementsByClassName("overlay").fadeIn();
-}
-
-function closeSidebar() {
-  document.getElementById('sidebar').classList.remove('active');
-  document.getElementsByClassName( "overlay" ).fadeOut();
-}
