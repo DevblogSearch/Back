@@ -61,7 +61,7 @@ router.get('/', (req, res, next) => {
     
     res.format({
       'text/html': function() {
-        let searchResult = template.parseSearchResponse(response,q)
+        let searchResult = template.parseSearchResponse(response, q, auth.IsOwner(req, res));
         let header = `
           <div class="search-page search-content-2">
             <div class="search-bar ">
