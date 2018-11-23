@@ -1,8 +1,6 @@
 const express = require('express');
 const template = require('../lib/template.js');
-const shortid = require('shortid');
 const db = require('../lib/db');
-const bcrypt = require('bcrypt');
 
 module.exports = function (passport) {
 
@@ -69,42 +67,6 @@ module.exports = function (passport) {
     res.send(html);
   });
 
-  router.post('/register_process', (req, res) => {
-    let post = req.body;
-    let email = post.email;
-    let pwd = post.pwd;
-    let pwdComfirm = post.pwdComfirm;
-    let displayName = post.displayName;
-
-    if (pwd !== pwdComfirm) {
-      // TODO Login exception handling.
-      // request.flash('error', 'Password must same!');
-      // response.redirect('/auth/register');
-    }
-
-    bcrypt.hash(pwd, 10, (err, hash) => {
-      let user = db.get('users').find({
-        email: email
-      }).value();
-      if (user) {
-        user.password = hash;
-        user.displayName = displayName;
-        db.get('users').find({
-          id: user.id
-        }).assign(user).write();
-      } else {
-        user = {
-          id: shortid.generate(),
-          email: email,
-          password: hash,
-          displayName: displayName
-        };
-      }
-      db.get('users').push(user).write();
-
-      req.login(user, (err) => res.redirect('/'));
-    });
-  });
 
   router.get('/logout', (req, res) => {
     req.logout();

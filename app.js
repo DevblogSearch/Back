@@ -6,6 +6,8 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const helmet = require('helmet');
 const FileStore = require('session-file-store')(session);
+const db = require('./lib/db');
+const queryString = require('query-string');
 
 const app = express();
 
@@ -23,31 +25,70 @@ app.use(session({
   resave: sessionConfig.resave,
   saveUninitialized: sessionConfig.saveUninitialized,
   // cookie: sessionConfig.cookie,
-  store: new FileStore()
+  // store: new FileStore()
 }));
 
 const passport = require('./lib/passport')(app);
 
 // Routing setting.
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/user');
 const authRouter = require('./routes/auth')(passport);
 const searchRouter = require('./routes/search');
 const documentRouter = require('./routes/document');
 const autocomplete = require('./routes/autocomplete');
 
 app.use('/', indexRouter);
-app.use('/user', usersRouter);
 app.use('/auth', authRouter);
 app.use('/search', searchRouter);
 app.use('/document', documentRouter);
 app.use('/autocomplete', autocomplete);
 
-app.post('/track_pings', (req, res) => {
-  console.log("Counter added");
-  res.send();
-})
+app.post(('/blog'), (req, res) => {
+  db.Blog.findOrCreate({ where: {url: req.body.content } })
+    .spread((url, created) => {
+      console.log(url.get({
+        plain: true
+      }));
+      console.log('create: ', created);
+      res.send(JSON.stringify({ content: url.id }));
+    });
+});
 
+app.post('/ping_events', (req, res) => {
+  db.PingEvent.create({
+    blog_id: 0, // TODO replace by req.body.blog_id
+    url: req.query.url
+  });
+
+  res.end();
+});
+
+app.post('/like_events', (req, res) => {
+  console.log(`Like events email : ${req.query.email}`);
+
+  db.User.findOne({
+    where: { email: req.query.email }
+  }).then((user) => {
+
+    db.LikeEvent.findOne({
+      where: {user_id: user.id, url: 'http://example.com'}
+    }).then(exist => {
+      if (!exist) {
+        db.LikeEvent.create({
+          user_id: user.id,
+          url: 'http://example.com'
+        });
+      } else {
+        console.log('Like event already exist');
+      }
+    });
+
+  }).catch(err => {
+    console.log('User not Found!');
+  });
+
+  res.end('/');
+});
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

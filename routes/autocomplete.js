@@ -20,7 +20,7 @@ router.get('/', async (req, res, next) => {
       });
 
       if(!res.headersSent) {
-          res.json(results);
+        res.json(results);
       }
   } catch (error) {
     console.log(error);
