@@ -3,30 +3,62 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>License</title>
+  <title>bookmark</title>
 
   <link href="public/stylesheet/common.css" rel="stylesheet" type="text/css" />
+  <link href="public/stylesheet/bookmark.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="Script.js"></script>
+
 </head>
 
 
 <body>
-
-  <h1 id = "common header">
+  <h1 id = "common header" class = "col-xs-12">
     북마크
-</h1>
-    <div class="container">
+ </h1>
 
+  <div id ="bookmark_container">
+    <ul id="bookmark_list" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-      <div class="bookmark">
-        <div class= "bookmark_content">
+      <li class="bookmark col-xs-10 col-md-3 col-lg-2">
+        <div class="bookmark_content">
         </div>
-        <div class = "bookmark_del">
+        <div class="bookmark_del">
           <button class = "delete_button">✖</button>
         </div>
-      </div>
+      </li>
 
+      <li class="bookmark col-xs-10 col-md-3 col-lg-2">
+        <div class="bookmark_content">
+        </div>
+        <div class="bookmark_del">
+          <button class = "delete_button">✖</button>
+        </div>
+      </li>
 
-    </div>
+      <li class="bookmark col-xs-10 col-md-3 col-lg-2">
+        <div class="bookmark_content">
+        </div>
+        <div class="bookmark_del">
+          <button class = "delete_button">✖</button>
+        </div>
+      </li>
+
+      <li class="bookmark col-xs-10 col-md-3 col-lg-2">
+        <div class="bookmark_content">
+        </div>
+        <div class="bookmark_del">
+          <button class = "delete_button">✖</button>
+        </div>
+      </li>
+
+  </div>
+  <div id="footer">
+    <a href="public/oss_license.html">오픈소스 정보</a>
+  </div>
 </body>
 
 </html>

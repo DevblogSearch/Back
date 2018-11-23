@@ -13,17 +13,17 @@ router.get('/', (req, res, next) => {
     </div>
   `;
   let body = `
-    <div class="content center col-sm-4 col-sm-offset-4" id="main">
+    <div class="col-lg-4 col-lg-offset-4 col-sm-6 col-sm-offset-3 col-xs-12" id="main">
     <div id="area-logo">
       <div>
         <a href="#">
-          <img id="logo-img" src="/images/king_sejong.jpg">
+          <img id="logo-img" src="/images/king_sejong.jpg" class="img-responsive center-block">
         </a>
       </div>
     </div>
     <div class="input-group">
     <form action="/search" method="GET" id="form1">
-        <input type = "text" class="form-control" placeholder="검색어를 입력하세요" style="height: 44px" autocomplete="off" maxlength="100" name="q">
+        <input id="inputSearch" type = "text" class="form-control" placeholder="검색어를 입력하세요" style="height: 44px" autocomplete="off" maxlength="100" name="q">
         <input type="hidden" name="start" value="1">
         <input type="hidden" name="n" value="10">
       </form>
@@ -33,7 +33,10 @@ router.get('/', (req, res, next) => {
     </div>
     </div>
     `;
-  let html = template.HTML(title, body, header,"");
+  let local_library = `
+    <link href="/stylesheet/index.css" rel="stylesheet" type="text/css" />
+  `;
+  let html = template.HTML(title, local_library, body, header,"");
   res.send(html);
 });
 

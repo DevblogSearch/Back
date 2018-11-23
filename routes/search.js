@@ -24,6 +24,7 @@ router.get('/', (req, res, next) => {
   const n = req.query.n;
   //for paging
   const start = (req.query.start - 1) * n;
+  var numFound = 0;
   var response = [];
 
   const query = solrClient.query()
@@ -47,6 +48,7 @@ router.get('/', (req, res, next) => {
     //collapse document by grouping title
     //because so many same result and has different url by params or tags
     const groups = result.grouped.title.groups;
+    numFound = result.grouped.title.matches;  // ?--- matches에 있는 숫자가 매칭된 글의 총 갯수가 맞는가. ('콤마' 검색시 실제 나오는 갯수 11개. matches는 18)
     console.log('result length = ' + groups.length);
     for (let docIdx in groups) {
       const doc = groups[docIdx].doclist.docs[0];
@@ -58,23 +60,36 @@ router.get('/', (req, res, next) => {
       //trim space and remove html tags using regex
       response.push({title:doc.title, url:doc.url, content:snipset.join().trim().replace(/(<([^>]+)>)/ig,"")});
     }
-    
+
     res.format({
       'text/html': function() {
-        let searchResult = template.parseSearchResponse(response, q, auth.IsOwner(req, res));
+        let searchResult = template.parseSearchResponse(response, q, req.query.start, numFound, auth.IsOwner(req, res));
         let header = `
+          <div id="sidebar">
+            <div class="close-sidebar">
+              <button class = "close_button">✖</button>
+            </div>
+            ` + auth.StatusUI(req,res) + `
+          </div>
+          <div id="toggle-btn" class = "visible-xs-block visible-sm-block" >
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div id ="overlay"></div>
+
           <div class="search-page search-content-2">
-            <div class="search-bar ">
+            <div class="search-bar" style="margin-bottom: 10px;">
               <div class="row">
-                <div class="logo-container">
+                <div id ="logo-container" class = "visible-lg-block visible-md-block">
                   <a href="/">
                     <img width="130px" width="55px" id="logo-img" src="/images/Chosung_on_grid_1.png" alt="logo">
                   </a>
                 </div>
-                <div class="col-md-5">
+                <div class="col-xs-11 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-0 col-lg-5 col-lg-offset-0">
                   <div class="input-group">
                     <form action="/search" method="GET" id="form1">
-                      <input id="search_word" type = "text" class="form-control" placeholder="검색어를 입력하세요" value="${q}" autocomplete="off" maxlength="100" name="q">
+                      <input id="inputSearch" type = "text" class="form-control" placeholder="검색어를 입력하세요" value="${q}" autocomplete="off" maxlength="100" name="q">
                       <input id="page" type="hidden" name="start" value="1">
                       <input type="hidden" name="n" value="10">
                     </form>
@@ -83,7 +98,7 @@ router.get('/', (req, res, next) => {
                     </span>
                   </div>
                 </div>
-                <div id="login">
+                <div id="login" class = "visible-lg-block visible-md-block " >
                 ` + auth.StatusUI(req,res) + `
                 </div>
               </div>
@@ -91,7 +106,10 @@ router.get('/', (req, res, next) => {
           </div>
         </div>
         `;
-        let html = template.HTML('나랏말싸미 - ' + q, '', header, searchResult);
+        let local_library =`
+          <link href="/stylesheet/search.min.css" rel="stylesheet" type="text/css" />
+        `;
+        let html = template.HTML('나랏말싸미 - ' + q, local_library,'', header, searchResult);
         res.send(html);
       },
       'application/json': function(){

@@ -1,0 +1,46 @@
+
+#bookmark_container {
+  min-height: 100%;
+  background-color: #F2F2F2;
+  list-style: none;
+}
+
+
+#bookmark_list {
+  background-color: #F2F2F2;
+  list-style: none;
+  margin : 0;
+}
+
+
+#bookmark_container .bookmark {
+  float: left;
+  margin: 60px;
+  height: 300px;
+  padding : 0 !important;
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: 0.5px 0.5px 0.5px 0.5px #999;
+}
+
+#bookmark_container .bookmark_content {
+  width: 100%;
+  height: 270px;
+}
+
+#bookmark_container .bookmark_del {
+  width: 100%;
+  height: 30px;
+  background-color: #F2F2F2;
+}
+
+#bookmark_container .delete_button {
+  width: 30px;
+  height: 30px;
+  outline: none;
+  padding: 0;
+  cursor: pointer;
+  border: 0;
+  background-color: #F2F2F2;
+  float: right;
+}
