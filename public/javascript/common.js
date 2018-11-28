@@ -35,6 +35,15 @@ $(document).ready(function () {
     });
 
     $(function(){
+        isSelect = false
+        $("#inputSearch").keydown(function(event){
+            if(event.which === 38 || event.which === 40){
+                isSelect = true
+            }
+            else{
+                isSelect = false
+            }
+        });
         $("#inputSearch").autocomplete({
             source : function( req, res){
                 $.ajax({
@@ -43,7 +52,9 @@ $(document).ready(function () {
                         q: req.term
                     },
                     success: function(data){
-                        res(data);
+                        res($.map(data,function(n){
+                            return n.split("").join(' ')
+                        }))
                     }
                 });
             },
@@ -51,32 +62,16 @@ $(document).ready(function () {
                 event.preventDefault();
             },
             search:function(event,ui){
-                var isSelect = $(this).attr('isSelect');
-                isSelect = (typeof isSelect === "undefined") ? 0 : isSelect;
-                if (isSelect == 1) {
-                    console.log('선택 된 직후이니 처리 안함.');
-                    return false;
+                isSelect = (typeof isSelect === "undefined") ? false : isSelect;
+                if (isSelect) {
+                    return false;      
                 }
-            },
-            select:function(event,ui){
-                $(this).attr('isSelect', 1);
-                setTimeout(function(obj){
-                    $(obj).attr('isSelect', 0);
-                }, 500, this );
-                $(this).val('');
-                return false;
-            },
-            open: function() {
-                $( this ).autocomplete("widget").width("323px");
-                $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
-            },
-            close: function() {
-                $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
             },
             messages: {
                 noResults: '',
                 results: function(){}
-            }
+            },
+            appendTo:".input-group"
         });
     });
     $('a.ui-state-focus').parent().css("background","#eee");

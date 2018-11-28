@@ -64,19 +64,20 @@ app.post('/ping_events', (req, res) => {
 });
 
 app.post('/like_events', (req, res) => {
-  console.log(`Like events email : ${req.query.email}`);
+  console.log(req.body);
+  console.log(`Like events user_id : ${req.body.user_id}`);
+  console.log(`Like events url : ${req.body.url}`);
 
   db.User.findOne({
-    where: { email: req.query.email }
+    where: { id: req.body.user_id }
   }).then((user) => {
-
     db.LikeEvent.findOne({
-      where: {user_id: user.id, url: 'http://example.com'}
+      where: {user_id: user.id, url: req.body.url}
     }).then(exist => {
       if (!exist) {
         db.LikeEvent.create({
           user_id: user.id,
-          url: 'http://example.com'
+          url: req.body.url
         });
       } else {
         console.log('Like event already exist');
