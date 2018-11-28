@@ -63,8 +63,11 @@ router.get('/', (req, res, next) => {
 
     res.format({
       'text/html': function() {
-        let searchResult = template.parseSearchResponse(response, q, req.query.start, numFound, auth.IsOwner(req, res));
+        let searchResult = template.parseSearchResponse(response, q, req.query.start, numFound, req.user);
         let header = `
+          
+          <script src="javascript/likeEvent.js"></script>
+
           <div id="sidebar">
             <div class="close-sidebar">
               <button class = "close_button">✖</button>
