@@ -79,7 +79,7 @@ router.get('/', (req, res, next) => {
           <div id ="overlay"></div>
 
           <div class="search-page search-content-2">
-            <div class="search-bar" style="margin-bottom: 10px;">
+            <div class="search-bar" style="margin-bottom:0px;">
               <div class="row">
                 <div id ="logo-container" class = "visible-lg-block visible-md-block">
                   <a href="/">
