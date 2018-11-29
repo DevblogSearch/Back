@@ -8,7 +8,7 @@ const helmet = require('helmet');
 const FileStore = require('session-file-store')(session);
 const db = require('./lib/db');
 const queryString = require('query-string');
-
+const solrClient = require('./lib/solr')();
 const app = express();
 
 // Middleware Settings.
@@ -60,7 +60,18 @@ app.post('/ping_events', (req, res) => {
     url: req.query.url
   });
 
-  res.end();
+  console.log(req.query);
+  const updateParam ={url:req.query.url, clicked:{inc:1}}; 
+  console.log(updateParam);
+  solrClient.update(updateParam, {commit: true})
+    .then(function(result) {
+        return result;
+    }).catch(function(err) {
+         if (err) {
+            console.log(err);
+        }
+    });
+        res.end();
 });
 
 app.post('/like_events', (req, res) => {
