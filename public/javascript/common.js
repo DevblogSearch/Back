@@ -71,7 +71,7 @@ $(document).ready(function () {
                 noResults: '',
                 results: function(){}
             },
-            appendTo:".input-group"
+            appendTo:".reactive-div"
         });
     });
     $('a.ui-state-focus').parent().css("background","#eee");
