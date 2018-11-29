@@ -3,7 +3,7 @@ function likeEvent(user_id, url) {
   console.log(`User: ${user_id} URL: ${url}`);
   $.ajax({
       type: "POST",
-      url: "/like_events",
+      url: "/events/like",
       data: { 
           user_id: user_id,
           url: url
@@ -22,7 +22,7 @@ function cancelLikeEvent(user_id, url) {
     console.log(`User: ${user_id} URL: ${url}`);
     $.ajax({
         type: "POST",
-        url: "/cancel_like_events",
+        url: "/events/cancel_like",
         data: {
             user_id: user_id,
             url: url

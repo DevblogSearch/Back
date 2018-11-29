@@ -36,12 +36,14 @@ const authRouter = require('./routes/auth')(passport);
 const searchRouter = require('./routes/search');
 const documentRouter = require('./routes/document');
 const autocomplete = require('./routes/autocomplete');
+const events = require('./routes/events');
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/search', searchRouter);
 app.use('/document', documentRouter);
 app.use('/autocomplete', autocomplete);
+app.use('/events', events);
 
 app.post(('/blog'), (req, res) => {
   db.Blog.findOrCreate({ where: {url: req.body.content } })
@@ -52,66 +54,6 @@ app.post(('/blog'), (req, res) => {
       console.log('create: ', created);
       res.send(JSON.stringify({ content: url.id }));
     });
-});
-
-app.post('/ping_events', (req, res) => {
-  db.PingEvent.create({
-    blog_id: 0, // TODO replace by req.body.blog_id
-    url: req.query.url
-  });
-
-  res.end();
-});
-
-app.post('/like_events', (req, res) => {
-  console.log(req.body);
-  console.log(`Like events user_id : ${req.body.user_id}`);
-  console.log(`Like events url : ${req.body.url}`);
-
-  db.User.findOne({
-    where: { id: req.body.user_id }
-  }).then((user) => {
-    db.LikeEvent.findOne({
-      where: {user_id: user.id, url: req.body.url}
-    }).then(exist => {
-      if (!exist) {
-        db.LikeEvent.create({
-          user_id: user.id,
-          url: req.body.url
-        });
-      } else {
-        console.log('Like event already exist');
-      }
-    });
-
-  }).catch(err => {
-    console.log('User not Found!');
-  });
-
-  res.end('/');
-});
-
-app.post('/cancel_like_events', (req, res) => {
-  console.log(req.body);
-  console.log(`cancel like events user_id : ${req.body.user_id}`);
-  console.log(`cancel like events url : ${req.body.url}`);
-
-  db.User.findOne({
-    where: { id: req.body.user_id }
-  }).then((user) => {
-    db.LikeEvent.findOne({
-      where: {user_id: user.id, url: req.body.url}
-    }).then(likeEvent => {
-      likeEvent.destroy();
-    }).catch(err => {
-      console.log('Like not exist');
-    });
-
-  }).catch(err => {
-    console.log('User not Found!');
-  });
-
-  res.end('/');
 });
 
 // catch 404 and forward to error handler
