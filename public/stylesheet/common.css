@@ -154,6 +154,8 @@ p {
 
 .ui-autocomplete{
   position: initial;
+  background: white;
+  z-index: 999;
   width: -webkit-fill-available !important;
 }
 .ui-autocomplete li{

@@ -14,3 +14,20 @@
     background-color:#6ba8e9;
     z-index: -1;
 }
+.article{
+    position: absolute;
+    top: 85px;
+}
+#footer{
+    display: none;
+}
+#search-page-footer{
+    clear: both;
+    margin-top: -40px;
+    padding: 10px;
+    bottom: 0;
+    height: 40px;
+    background-color: #F2F2F2;
+    position: absolute;
+    width: 100%;
+}
