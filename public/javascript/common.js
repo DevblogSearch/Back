@@ -16,9 +16,9 @@ $(document).ready(function () {
   })
 
     $(window).scroll(function() {
-      if (Math.ceil($(window).scrollTop()) == $(document).height() - $(window).height()) {
+      if (Math.floor($(window).scrollTop()) == $(document).height() - $(window).height()) {
 
-        $("#bookmark_list").append($('<li class="bookmark col-xs-10 col-md-3 col-lg-2"><div class="bookmark_content"></div><div class="bookmark_del"><button class = "delete_button">✖</button></div></li>'));
+        $("#bookmark_list").append($('<li class="bookmark col-xs-12 col-md-3 col-lg-offset-1 col-lg-3"><div class="bookmark_content"></div><div class="bookmark_del"><button class = "delete_button">✖</button></div></li>'));
 
         $.ajax({
           type: "GET",
@@ -26,7 +26,7 @@ $(document).ready(function () {
           dataType: "json",
           success: function(data) {
 
-            $("#bookmark_list").append($('<li class="bookmark col-xs-10 col-sm-5 col-md-4 col-lg-4"><div class="bookmark_content"></div><div class="bookmark_del"><button class = "delete_button">✖</button></div></li>'));
+            $("#bookmark_list").append($('<li class="bookmark col-xs-12 col-md-3 col-lg-offset-1 col-lg-3"><div class="bookmark_content"></div><div class="bookmark_del"><button class = "delete_button">✖</button></div></li>'));
 
           }
         });
@@ -64,7 +64,7 @@ $(document).ready(function () {
             search:function(event,ui){
                 isSelect = (typeof isSelect === "undefined") ? false : isSelect;
                 if (isSelect) {
-                    return false;      
+                    return false;
                 }
             },
             messages: {
