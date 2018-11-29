@@ -151,3 +151,10 @@ p {
   background-color: white;
   margin: 5px;
 }
+
+.ui-autocomplete{
+  position: initial;
+}
+.ui-autocomplete li{
+  list-style-type: none;
+}

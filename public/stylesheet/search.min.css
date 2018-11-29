@@ -15,9 +15,3 @@
     background-color:#6ba8e9;
     z-index: -1;
 }
-.ui-autocomplete{
-    position: initial;
-}
-.ui-autocomplete li{
-    list-style-type: none;
-}
