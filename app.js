@@ -8,7 +8,7 @@ const helmet = require('helmet');
 const FileStore = require('session-file-store')(session);
 const db = require('./lib/db');
 const queryString = require('query-string');
-
+const solrClient = require('./lib/solr')();
 const app = express();
 
 // Middleware Settings.

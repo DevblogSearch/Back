@@ -1,5 +1,6 @@
 const express = require('express');
 const db = require('../lib/db');
+const events = require('../routes/events');
 
 const router = express.Router();
 
@@ -36,6 +37,17 @@ router.post('/like', (req, res) => {
   }).catch(err => {
     console.log('User not Found!');
   });
+
+  const updateParam ={url:req.query.url, clicked:{inc:1}}; 
+  console.log(updateParam);
+  solrClient.update(updateParam, {commit: true})
+    .then(function(result) {
+        return result;
+    }).catch(function(err) {
+         if (err) {
+            console.log(err);
+        }
+    });
 
   res.end('/');
 });
