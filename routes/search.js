@@ -63,8 +63,11 @@ router.get('/', (req, res, next) => {
 
     res.format({
       'text/html': function() {
-        let searchResult = template.parseSearchResponse(response, q, req.query.start, numFound, auth.IsOwner(req, res));
+        let searchResult = template.parseSearchResponse(response, q, req.query.start, numFound, req.user);
         let header = `
+          
+          <script src="javascript/likeEvent.js"></script>
+
           <div id="search-bar-background"></div>
           <div id="sidebar">
             <div class="close-sidebar">
@@ -80,7 +83,7 @@ router.get('/', (req, res, next) => {
           <div id ="overlay"></div>
 
           <div class="search-page search-content-2">
-            <div class="search-bar" style="margin-bottom: 10px;">
+            <div class="search-bar" style="margin-bottom:0px;">
               <div class="row">
                 <div id ="logo-container" class = "visible-lg-block visible-md-block">
                   <a href="/">

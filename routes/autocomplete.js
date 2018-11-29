@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get('/', async (req, res, next) => {
   const q = req.query.q;
-  const query = `http://localhost:8983/solr/naratmalssm/suggest?suggest=true&suggest.q=${qs.escape(q)}`;
+  const query = `http://hangoole.com:8983/solr/naratmalssm/suggest?suggest=true&suggest.q=${qs.escape(q)}`;
   try{
       const solrResult = await request(query);
       const body = JSON.parse(solrResult.body);
