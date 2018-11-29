@@ -154,6 +154,7 @@ p {
 
 .ui-autocomplete{
   position: initial;
+  width: -webkit-fill-available !important;
 }
 .ui-autocomplete li{
   list-style-type: none;
