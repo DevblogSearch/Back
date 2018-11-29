@@ -10,6 +10,16 @@ section {
   padding-bottom: 40px;
 }
 
+h3 {
+  font-size: 18px;
+}
+
+p {
+  font-size: 14px !important;
+  line-height: 1.5;
+  color : #545454;
+}
+
 
 
 #login {
@@ -39,10 +49,9 @@ section {
 #common\ header {
   background-color: #6ba8e9;
   margin: 0;
-  padding: 10px 50px 10px 100px;
   color: white;
   text-align: left;
-  line-height: 2.0;
+  height: 80px;
 }
 
 
@@ -72,7 +81,8 @@ section {
 }
 
 .search-container li {
-  border-bottom: 0.4px solid black;
+  margin-top:30px;
+  margin-bottom:20px;
 }
 
 
@@ -140,4 +150,11 @@ section {
   height: 5px;
   background-color: white;
   margin: 5px;
+}
+
+.ui-autocomplete{
+  position: initial;
+}
+.ui-autocomplete li{
+  list-style-type: none;
 }

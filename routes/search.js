@@ -68,6 +68,7 @@ router.get('/', (req, res, next) => {
           
           <script src="javascript/likeEvent.js"></script>
 
+          <div id="search-bar-background"></div>
           <div id="sidebar">
             <div class="close-sidebar">
               <button class = "close_button">✖</button>
@@ -82,14 +83,14 @@ router.get('/', (req, res, next) => {
           <div id ="overlay"></div>
 
           <div class="search-page search-content-2">
-            <div class="search-bar" style="margin-bottom: 10px;">
+            <div class="search-bar" style="margin-bottom:0px;">
               <div class="row">
                 <div id ="logo-container" class = "visible-lg-block visible-md-block">
                   <a href="/">
                     <img width="130px" width="55px" id="logo-img" src="/images/Chosung_on_grid_1.png" alt="logo">
                   </a>
                 </div>
-                <div class="col-xs-11 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-0 col-lg-5 col-lg-offset-0">
+                <div class="reactive-div col-xs-11 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-0 col-lg-5 col-lg-offset-0">
                   <div class="input-group">
                     <form action="/search" method="GET" id="form1">
                       <input id="inputSearch" type = "text" class="form-control" placeholder="검색어를 입력하세요" value="${q}" autocomplete="off" maxlength="100" name="q">
