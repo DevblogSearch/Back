@@ -42,11 +42,8 @@ $(document).ready(function () {
 
             $("#bookmark_list").append($('<li class="bookmark col-xs-12 col-md-3 col-lg-offset-1 col-lg-3"><div class="bookmark_content"></div><div class="bookmark_del"><button class = "delete_button">✖</button></div></li>'));
 
-
-
           }
         });
-
       }
     });
 

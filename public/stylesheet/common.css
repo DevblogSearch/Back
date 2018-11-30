@@ -21,16 +21,21 @@ p {
 }
 
 
-
 #login {
   float: right;
   margin-right: 100px;
 }
 
-#login-main {
+.login-main-mob {
   float: right;
   margin-top: 50px;
   margin-right: 10px;
+}
+
+.login-main-pc {
+  float: right;
+  margin-top: 50px;
+  margin-right: 100px;
 }
 
 #main {
@@ -150,6 +155,17 @@ p {
   height: 5px;
   background-color: white;
   margin: 5px;
+}
+
+.ui-autocomplete {
+  position : initial;
+  background: white;
+  z-index : 999;
+  width : -webkit-fill-available !important;
+}
+
+.ui-autocomplete li {
+  list-style-type: none;
 }
 
 .search-content{

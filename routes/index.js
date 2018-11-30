@@ -8,7 +8,11 @@ const router = express.Router();
 router.get('/', (req, res, next) => {
   let title = "나랏말싸미_main";
   let header = `
-    <div id="login-main">
+    <div class ="login-main-mob visible-xs-block visible-sm-block" >
+    ` + auth.StatusUI(req,res) + `
+    </div>
+
+    <div class ="login-main-pc visible-lg-block visible-md-block" >
     ` + auth.StatusUI(req,res) + `
     </div>
   `;
@@ -28,7 +32,7 @@ router.get('/', (req, res, next) => {
         <input type="hidden" name="n" value="10">
       </form>
       <span class="input-group-btn">
-        <button form="form1" class="btn blue uppercase bold" style="height: 44px">검색</button>
+        <button form="form1" class="btn blue uppercase bold" style="height: 44px; border-left-width: 0px;">검색</button>
       </span>
     </div>
     </div>
