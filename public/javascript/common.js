@@ -24,7 +24,6 @@ $(document).ready(function () {
      $("#overlay").css("display" ,"none");
   })
 
-
   $(".button-like").click(function() {
     $(this).toggleClass("liked");
   });
