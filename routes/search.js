@@ -73,7 +73,7 @@ router.get('/', (req, res, next) => {
       'text/html': function() {
         let searchResult = template.parseSearchResponse(response, q, req.query.start, numFound, req.user);
         let header = `
-          
+
           <script src="javascript/likeEvent.js"></script>
 
           <div id="search-bar-background"></div>

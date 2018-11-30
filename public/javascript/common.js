@@ -28,6 +28,10 @@ $(document).ready(function () {
     $(this).toggleClass("liked");
   });
 
+  $(".mobile-heart").click(function() {
+    $(this).toggleClass("active");
+  });
+
 
     $(window).scroll(function() {
       if (Math.floor($(window).scrollTop()) == $(document).height() - $(window).height()) {

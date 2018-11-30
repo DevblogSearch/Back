@@ -9,10 +9,10 @@ function likeEvent(user_id, url) {
       url: url
     },
     success: function(result) {
-      alert('ok');
+
     },
     error: function(result) {
-      alert('error');
+      
     }
   });
 }

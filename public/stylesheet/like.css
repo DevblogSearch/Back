@@ -1,11 +1,8 @@
-
 .like-content {
   width : 20%;
   float : right;
   margin-top : 30px;
 }
-
-
 
 .button-like {
   border: 2px solid #8a8a8a;
@@ -76,4 +73,16 @@
 .liked:hover .fa,
 .liked:hover span {
   color: #fefefe;
+}
+
+.mobile-heart {
+  font-size: 36px;
+  border : 0;
+  outline: 0;
+  background-color: white;
+  color: #f2f2f2;
+}
+
+.active i{
+  color: #cc4b37 !important;
 }
