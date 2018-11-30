@@ -12,10 +12,14 @@ const router = express.Router();
   qstr += `content:"${q}"~100^4.0 OR `
   qstr += `_query_:"{!edismax qf='title^2.0 content' mm='2<75%'} ${q}"`
 */
-function buildQueryString(q) {
+/*
   qstr = `( (title:"${q}"~10 OR title:"${q}") AND (content:"${q}" OR content:"${q}"~100))^3.0`
-  qstr += `OR (content:"${q}" OR content:"${q}"~100)`
+  qstr += `OR (content:"${q}" OR content:"${q}"~1000)`
+*/
+function buildQueryString(q) {
+  qstr = `content:"${q}"`
   return qstr;
+
 }
 
 /*search result*/
@@ -25,12 +29,13 @@ router.get('/', (req, res, next) => {
   //for paging
   const start = (req.query.start - 1) * n;
   var numFound = 0;
+  var maxPages = 1;
   var response = [];
 
   const query = solrClient.query()
     .q(buildQueryString(q))
     .hlQuery('hl=true&hl.fl=*&hl.snippets=2&hl.fragsize=100&hl.method=unified')
-    .groupQuery('group=true&group.field=title&debug=true')
+    .groupQuery('group=true&group.field=title&debug=true&group.ngroups=true')
     .addParams({
       wt: "json",
       debug: true
@@ -45,10 +50,13 @@ router.get('/', (req, res, next) => {
       res.status(400).end();
       return;
     }
+    console.log(result);
     //collapse document by grouping title
     //because so many same result and has different url by params or tags
     const groups = result.grouped.title.groups;
-    numFound = result.grouped.title.matches;  // ?--- matches에 있는 숫자가 매칭된 글의 총 갯수가 맞는가. ('콤마' 검색시 실제 나오는 갯수 11개. matches는 18)
+    numFound = result.grouped.title.ngroups;  // ?--- matches에 있는 숫자가 매칭된 글의 총 갯수가 맞는가. ('콤마' 검색시 실제 나오는 갯수 11개. matches는 18)
+    console.log(numFound + ' , ' + groups.length);
+
     console.log('result length = ' + groups.length);
     for (let docIdx in groups) {
       const doc = groups[docIdx].doclist.docs[0];
@@ -68,6 +76,7 @@ router.get('/', (req, res, next) => {
           
           <script src="javascript/likeEvent.js"></script>
 
+          <div id="search-bar-background"></div>
           <div id="sidebar">
             <div class="close-sidebar">
               <button class = "close_button">✖</button>
@@ -89,7 +98,7 @@ router.get('/', (req, res, next) => {
                     <img width="130px" width="55px" id="logo-img" src="/images/Chosung_on_grid_1.png" alt="logo">
                   </a>
                 </div>
-                <div class="col-xs-11 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-0 col-lg-5 col-lg-offset-0">
+                <div class="reactive-div col-xs-11 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-0 col-lg-5 col-lg-offset-0">
                   <div class="input-group">
                     <form action="/search" method="GET" id="form1">
                       <input id="inputSearch" type = "text" class="form-control" placeholder="검색어를 입력하세요" value="${q}" autocomplete="off" maxlength="100" name="q">

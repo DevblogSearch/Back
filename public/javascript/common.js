@@ -1,4 +1,13 @@
 $(document).ready(function () {
+    isMobile = false
+  $(window).resize(function(){
+    var windowWidth = $( window ).width();
+    if(windowWidth <= 768) {
+        isMobile = true
+    } else {
+        isMobile = false
+    }
+  });
 
   $('#toggle-btn').click(function () {
      $('#sidebar').addClass("active");
@@ -60,6 +69,9 @@ $(document).ready(function () {
                         q: req.term
                     },
                     success: function(data){
+                        if(isMobile){
+                            data = data.slice(0,5)
+                        }
                         res($.map(data,function(n){
                             return n.split("").join(' ')
                         }))
@@ -79,7 +91,7 @@ $(document).ready(function () {
                 noResults: '',
                 results: function(){}
             },
-            appendTo:".input-group"
+            appendTo:".reactive-div"
         });
     });
     $('a.ui-state-focus').parent().css("background","#eee");

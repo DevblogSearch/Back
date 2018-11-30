@@ -50,3 +50,39 @@ body {
   background-color: white;
   float: right;
 }
+
+
+.button{
+	width: 50px;
+	height: 50px;
+	border-radius: 5px;
+	background: none;
+	cursor: pointer;
+	transition: background 0.5s ease;
+}
+.button:hover{
+
+}
+.active#heart:before,.active#heart:after{
+	background: red !important;
+}
+#heart {
+    width: 10px;
+    height: 10px;
+    transition: background 0.5s ease;
+}
+#heart:before,
+#heart:after {
+	transition: background 0.5s ease;
+    content: "";
+    width: 20px;
+    height: 40px;
+    background: dimgrey;
+    border-radius: 50px 50px 0 0;
+    transform: rotate(-45deg);
+    transform-origin: 0 100%;
+}
+#heart:after {
+    transform: rotate(45deg);
+    transform-origin :100% 100%;
+}
