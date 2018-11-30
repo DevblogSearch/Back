@@ -30,7 +30,7 @@ p {
 #login-main {
   float: right;
   margin-top: 50px;
-  margin-right: 63px;
+  margin-right: 10px;
 }
 
 #main {
@@ -150,4 +150,9 @@ p {
   height: 5px;
   background-color: white;
   margin: 5px;
+}
+
+.search-content{
+  float : left;
+  width: 80%;
 }

@@ -1,49 +1,79 @@
-.button{
-	width: 50px;
-	height: 50px;
-    top:50%;
-    /* position: fixed; */
-    position: relative;
-	left: 50%;
-	margin-top: -45px;
-	margin-left: -50px;
-	border-radius: 5px;
-	background: none;
-	cursor: pointer;
-	transition: background 0.5s ease;
+
+.like-content {
+  width : 20%;
+  float : right;
+  margin-top : 30px;
 }
 
-.button:hover{
 
+
+.button-like {
+  border: 2px solid #8a8a8a;
+  background-color: transparent;
+  text-decoration: none;
+  padding: 1rem;
+  position: relative;
+  vertical-align: middle;
+  text-align: center;
+  display: inline-block;
+  border-radius: 3rem;
+  color: #8a8a8a;
+  transition: all ease 0.4s;
 }
 
-.active#heart:before,.active#heart:after{
-	background: red !important;
+.button-like span {
+  margin-left: 0.5rem;
 }
 
-#heart {
-    width: 100px;
-    height: 90px;
-    transition: background 0.5s ease;
+.button-like .fa,
+.button-like span {
+  transition: all ease 0.4s;
 }
 
-#heart:before,
-#heart:after {
-	transition: background 0.5s ease;
-    position: absolute;
-    content: "";
-    left: 50px;
-    top: 0;
-    width: 50px;
-    height: 80px;
-    background: dimgrey;
-    border-radius: 50px 50px 0 0;
-    transform: rotate(-45deg);
-    transform-origin: 0 100%;
+.button-like:focus {
+  background-color: transparent;
 }
 
-#heart:after {
-    left: 0;
-    transform: rotate(45deg);
-    transform-origin :100% 100%;
+.button-like:focus .fa,
+.button-like:focus span {
+  color: #8a8a8a;
+}
+
+.button-like:hover {
+  border-color: #cc4b37;
+  background-color: transparent;
+}
+
+.button-like:hover .fa,
+.button-like:hover span {
+  color: #cc4b37;
+}
+
+.liked {
+  background-color: #cc4b37;
+  border-color: #cc4b37;
+}
+
+.liked .fa,
+.liked span {
+  color: #fefefe;
+}
+
+.liked:focus {
+  background-color: #cc4b37;
+}
+
+.liked:focus .fa,
+.liked:focus span {
+  color: #fefefe;
+}
+
+.liked:hover {
+  background-color: #cc4b37;
+  border-color: #cc4b37;
+}
+
+.liked:hover .fa,
+.liked:hover span {
+  color: #fefefe;
 }

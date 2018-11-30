@@ -4,7 +4,7 @@ function likeEvent(user_id, url) {
   $.ajax({
       type: "POST",
       url: "/like_events",
-      data: { 
+      data: {
           user_id: user_id,
           url: url
       },
