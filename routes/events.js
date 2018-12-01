@@ -1,24 +1,36 @@
 const express = require('express');
 const db = require('../lib/db');
 const events = require('../routes/events');
+const solrClient = require('../lib/solr')();
 
 const router = express.Router();
 
-router.post('/ping', (req, res) => {
-  db.PingEvent.create({
+router.post('/ping', async (req, res) => {
+  await db.PingEvent.create({
     blog_id: 0, // TODO replace by req.body.blog_id
     url: req.query.url
   });
 
+  const updateParam ={url:req.query.url, clicked:{inc:1}}; 
+  console.log(updateParam);
+  await solrClient.update(updateParam, {commit: true})
+    .then(function(result) {
+        return result;
+    }).catch(function(err) {
+         if (err) {
+            console.log(err);
+        }
+    });
+
   res.end();
 });
 
-router.post('/like', (req, res) => {
+router.post('/like', async (req, res) => {
   console.log(req.body);
   console.log(`Like events user_id : ${req.body.user_id}`);
   console.log(`Like events url : ${req.body.url}`);
 
-  db.User.findOne({
+  await db.User.findOne({
     where: { id: req.body.user_id }
   }).then((user) => {
     db.LikeEvent.findOne({
@@ -37,17 +49,6 @@ router.post('/like', (req, res) => {
   }).catch(err => {
     console.log('User not Found!');
   });
-
-  const updateParam ={url:req.query.url, clicked:{inc:1}}; 
-  console.log(updateParam);
-  solrClient.update(updateParam, {commit: true})
-    .then(function(result) {
-        return result;
-    }).catch(function(err) {
-         if (err) {
-            console.log(err);
-        }
-    });
 
   res.end('/');
 });
