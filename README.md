@@ -5,6 +5,8 @@
 
 영어에 지친 개발자에게 한국의 앙질의 블로그를 제공해줍니다!
 
+https://hangoole.com/
+
 
 ### 앱 시작 방법
 `npm install`
