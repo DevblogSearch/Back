@@ -49,7 +49,7 @@ router.post('/like', (req, res) => {
         }
     });
 
-  res.end('/');
+    res.end('/');
 });
 
 router.post('/cancel_like', (req, res) => {
