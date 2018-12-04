@@ -2,6 +2,7 @@ const express = require('express');
 const db = require('../lib/db');
 const events = require('../routes/events');
 const solrClient = require('../lib/solr')();
+const preview = require('../lib/preview');
 
 const router = express.Router();
 
@@ -30,6 +31,9 @@ router.post('/like', async (req, res) => {
   console.log(`Like events user_id : ${req.body.user_id}`);
   console.log(`Like events url : ${req.body.url}`);
 
+  const pid = await preview.getPreviewCache(req.body.url);
+  console.log(`previed id : ${pid}`);
+
   await db.User.findOne({
     where: { id: req.body.user_id }
   }).then((user) => {
@@ -39,7 +43,8 @@ router.post('/like', async (req, res) => {
       if (!exist) {
         db.LikeEvent.create({
           user_id: user.id,
-          url: req.body.url
+          url: req.body.url,
+          preview_id: pid
         });
       } else {
         console.log('Like event already exist');
