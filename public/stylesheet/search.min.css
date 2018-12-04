@@ -17,6 +17,7 @@
 .article{
     position: absolute;
     top: 85px;
+    width: 100%;
 }
 #footer{
     display: none;
@@ -27,4 +28,8 @@
     height: 40px;
     background-color: #F2F2F2;
     width: 100%;
+}
+
+.search-item{
+    list-style-type: none;
 }
