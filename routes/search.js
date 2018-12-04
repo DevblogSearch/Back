@@ -56,17 +56,15 @@ router.get('/', (req, res, next) => {
     console.log(result.highlighting)
     //collapse document by grouping title
     //because so many same result and has different url by params or tags
-    const groups = result.grouped.title.groups;
-    numFound = result.grouped.title.ngroups;  // ?--- matches에 있는 숫자가 매칭된 글의 총 갯수가 맞는가. ('콤마' 검색시 실제 나오는 갯수 11개. matches는 18)
-    console.log(numFound + ' , ' + groups.length);
+    const groups = result.grouped.origin_title.groups;
+    numFound = result.grouped.origin_title.ngroups;  // ?--- matches에 있는 숫자가 매칭된 글의 총 갯수가 맞는가. ('콤마' 검색시 실제 나오는 갯수 11개. matches는 18)
 
     for (let docIdx in groups) {
       console.log(groups[docIdx]);
       const doc = groups[docIdx].doclist.docs[0];
       var snipset = result.highlighting[doc.url].content;
       if (snipset === undefined) {
-          console.log(result.highlighting[doc.url]);
-          snipset=[''];
+          snipset=result.highlighting[doc.url].suggestion_text;
     }
       //trim space and remove html tags using regex
       response.push({title:doc.title, url:doc.url, content:snipset.join().trim().replace(/(<([^>]+)>)/ig,"")});
