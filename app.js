@@ -36,6 +36,7 @@ const searchRouter = require('./routes/search');
 const documentRouter = require('./routes/document');
 const autocomplete = require('./routes/autocomplete');
 const events = require('./routes/events');
+const bookmark = require('./routes/bookmark');
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
@@ -43,6 +44,7 @@ app.use('/search', searchRouter);
 app.use('/document', documentRouter);
 app.use('/autocomplete', autocomplete);
 app.use('/events', events);
+app.use('/bookmark', bookmark);
 
 app.post(('/blog'), (req, res) => {
   db.Blog.findOrCreate({ where: {url: req.body.content } })
