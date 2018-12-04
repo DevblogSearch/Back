@@ -18,7 +18,6 @@ module.exports = function (passport) {
       });
       </script>
     `, `
-      <div style="position: fixed; left: 0;right: 0;top: 0; bottom: 0;"></div>
       <div class="login-form">
       <form action="/auth/login_process" method="post">
       <h2 class="text-center">나랏말싸미</h2><br>		
