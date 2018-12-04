@@ -3,7 +3,7 @@ const solrClient = require('../lib/solr')();
 
 const router = express.Router();
 const documentPostCheck = [ 'url', 'content', 'title' ];
-const options = {commit: true };
+const options = {commit: false };
 /*document result*/
 router.post('/', (req, res, next) => {
   for (var elem of req.body){
