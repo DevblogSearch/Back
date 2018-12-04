@@ -58,22 +58,23 @@ app.post(('/blog'), (req, res) => {
 });
 
 app.get(('/book_mark'), (req, res) => {
+  let bookMarkList = `
+    <li class="bookmark col-xs-12 col-md-3 col-lg-offset-1 col-lg-3">
+      <div class="bookmark_content">
+      </div>
+      <div class="bookmark_del">
+        <button class = "delete_button">✖</button>
+      </div>
+    </li>
+  `;
   let body = `
-    <div id = "common header">
+    <div id = "common header" >
       <h1 class = "col-xs-10 col-lg-offset-1 col-lg-7"> 북마크 </h1>
     </div>
     <div id ="bookmark_container">
       <ul id="bookmark_list" class= "col-xs-12 col-sm-12 col-md-12 col-lg-11">
-        <li class="bookmark col-xs-12 col-md-3 col-lg-offset-1 col-lg-3">
-          <div class="bookmark_content">
-          </div>
-          <div class="bookmark_del">
-            <button class = "delete_button">✖</button>
-          </div>
-        </li>
-    </div>
-    <div id="footer">
-      <a href="public/oss_license.html">오픈소스 정보</a>
+        ${bookMarkList}
+      </ul>
     </div>
   `;
   res.send(template.HTML('북마크', '', body, '', ''));
