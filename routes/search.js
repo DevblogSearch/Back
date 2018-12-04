@@ -3,12 +3,8 @@ const SolrNode = require('solr-node');
 const template = require('../lib/template');
 const auth = require('../lib/auth');
 const solrClient = require('../lib/solr')();
-<<<<<<< HEAD
 const querystring = require('querystring');
 const db = require('../lib/db');
-=======
-
->>>>>>> parent of f38a42c... show liked in search result
 const router = express.Router();
 /*
   qstr = `title:"${q}"~100^5.0 OR `
@@ -60,29 +56,18 @@ router.get('/', (req, res, next) => {
     console.log(result.highlighting)
     //collapse document by grouping title
     //because so many same result and has different url by params or tags
-<<<<<<< HEAD
-    const groups = result.grouped.origin_title.groups;
-    numFound = result.grouped.origin_title.ngroups;  // ?--- matches에 있는 숫자가 매칭된 글의 총 갯수가 맞는가. ('콤마' 검색시 실제 나오는 갯수 11개. matches는 18)
-=======
     const groups = result.grouped.title.groups;
     numFound = result.grouped.title.ngroups;  // ?--- matches에 있는 숫자가 매칭된 글의 총 갯수가 맞는가. ('콤마' 검색시 실제 나오는 갯수 11개. matches는 18)
     console.log(numFound + ' , ' + groups.length);
->>>>>>> parent of f38a42c... show liked in search result
 
     for (let docIdx in groups) {
       console.log(groups[docIdx]);
       const doc = groups[docIdx].doclist.docs[0];
       var snipset = result.highlighting[doc.url].content;
       if (snipset === undefined) {
-<<<<<<< HEAD
-          snipset=result.highlighting[doc.url].suggestion_text;
-    }
-
-=======
           console.log(result.highlighting[doc.url]);
           snipset=[''];
     }
->>>>>>> parent of f38a42c... show liked in search result
       //trim space and remove html tags using regex
       response.push({title:doc.title, url:doc.url, content:snipset.join().trim().replace(/(<([^>]+)>)/ig,"")});
     }
