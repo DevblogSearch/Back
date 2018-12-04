@@ -9,7 +9,7 @@ module.exports = function (passport) {
   router.get('/login', (req, res) => {
     let title = 'WEB - login';
     let html = template.HTML(title,`
-      <script src="javascript/plugins/geometryangle/geometryangle.js"></script>   
+      <script src="../javascript/plugins/geometryangle/geometryangle.js"></script>   
       <link rel="stylesheet" href="/stylesheet/login.min.css" type="text/css"/>
 
       <script type="text/javascript">
