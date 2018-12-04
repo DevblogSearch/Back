@@ -37,6 +37,9 @@ $(document).ready(function() {
   $('#overlay').click(function() {
     $('#sidebar').removeClass("active");
     $("#overlay").css("display", "none");
+
+    $('html, body').css({'overflow': 'auto', 'height': '100%'});
+    $('#element').off('scroll touchmove mousewheel');
   })
 
   $(".button-like").click(function() {
