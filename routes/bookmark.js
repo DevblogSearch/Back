@@ -43,6 +43,9 @@ router.get('/list', async (req, res) => {
                 ret.image = defaultImage;
             }
             ret.description = x.dataValues.description;
+            if (!ret.description){
+                ret.description = '';
+            }
             return ret;
         });
             
