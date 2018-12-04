@@ -1,5 +1,6 @@
 .login-form{width:340px;margin:0px auto 30px auto;padding-top: 30px}.login-form form{margin-bottom:15px;background:#f7f7f7;box-shadow:0 2px 2px rgba(0,0,0,.3);padding:30px}.login-form h2{margin:0 0 15px}.login-form .hint-text{color:#777;padding-bottom:15px;text-align:center}.form-control,.btn{min-height:38px;border-radius:2px}.login-btn{font-size:15px;font-weight:700}.or-seperator{margin:20px 0 10px;text-align:center;border-top:1px solid #ccc}.or-seperator i{padding:0 10px;background:#f7f7f7;position:relative;top:-11px;z-index:1}.social-btn .btn{margin:10px 0;font-size:15px;text-align:left;line-height:24px}.social-btn .btn i{float:left;margin:4px 15px 0 5px;min-width:15px}.input-group-addon .fa{font-size:18px}.btn-dark:hover{background-color:#23272b;border-color:#1d2124;color:#fff}.btn-dark{color:#fff;background-color:#343a40;border-color:#343a40}.fa-user{color:black!important}.fa-lock{color:black!important}
 .fss-output{
-    left: unset !important;
-    right: unset !important;
+}
+body{
+    overflow: hidden;
 }
