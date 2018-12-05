@@ -21,7 +21,7 @@ router.get('/', (req, res, next) => {
     <div id="area-logo">
       <div>
         <a href="#">
-          <img id="logo-img" src="/images/king_sejong.jpg" class="img-responsive center-block">
+          <img id="logo-img" src="/images/king_sejong_burned.png" class="img-responsive center-block">
         </a>
       </div>
     </div>
