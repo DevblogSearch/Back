@@ -59,6 +59,9 @@ app.post(('/blog'), (req, res) => {
 });
 
 app.get(('/bookmark'), async (req, res) => {
+  
+  let bookmark_resource = '<script src="/javascript/bookmark.js"></script>';
+  bookmark_resource += '<link href="/stylesheet/bookmark.css" rel="stylesheet" type="text/css" />';
 
   req.query.page = 1;
   req.query.id = req.user.id;
@@ -81,11 +84,12 @@ app.get(('/bookmark'), async (req, res) => {
       <li class="bookmark col-xs-12 col-md-3 col-lg-offset-1 col-lg-3">
         <div class="bookmark_content">
           <img src=${elem.image} height="200px" width="100%">
-          <h2>
+          <h3>
             <a href=${elem.url}>${elem.title}</a>
-          </h2>
-            <p>${elem.description}</p>
-
+          </h3>
+          <div class="bookmark_description">
+            ${elem.description}
+          </div> 
         </div>
         <div class="bookmark_del">
           <button class = "delete_button">✖</button>
@@ -96,8 +100,8 @@ app.get(('/bookmark'), async (req, res) => {
 
   body += '</ul></div>';
 
-  res.send(template.HTML('북마크', '', body, '', ''));
-
+  // <script> appendBookmark(); </script>
+  res.send(template.HTML('북마크', bookmark_resource, body, '', ''));
 });
 
 app.get('/bookmark/list', async (req, res) => {

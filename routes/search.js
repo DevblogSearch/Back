@@ -17,9 +17,19 @@ const router = express.Router();
   qstr = `( (title:"${q}"~10 OR title:"${q}") AND (content:"${q}" OR content:"${q}"~100))^3.0`
   qstr += `OR (content:"${q}" OR content:"${q}"~1000)`
 */
+/*
+  qstr = `title:"${q}"~100^5.0 OR `
+  qstr += `content:"${q}"~100^4.0 `
+*/
 function buildQueryString(q) {
   qstr = `title:"${q}"~100^5.0 OR `
   qstr += `content:"${q}"~100^4.0 `
+
+  // qstr = `_val_:"if(query($q1), field(boost), 0)"`
+  // qstr = `title:"${q}"~100^5.0 OR `
+  // qstr += `title:"${q}"^7.0 OR `
+  // qstr += `content:"${q}"^6.0 OR `
+  // qstr += `content:"${q}"~100^4.0 OR `
   console.log(qstr);
   return qstr;
 

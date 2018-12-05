@@ -1,42 +1,119 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>bookmark</title>
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link href="public/stylesheet/common.css" rel="stylesheet" type="text/css" />
-  <link href="public/stylesheet/bookmark.css" rel="stylesheet" type="text/css" />
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+      <title> 북마크 </title>
 
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script src="public/javascript/common.js"></script>
+      <!--Global Javascript-->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
-</head>
+      <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+      <script src="/javascript/plugins/backbone/underscore-min.js"></script>
+      <script src="/javascript/plugins/backbone/backbone-min.js"></script>
+      <script src="/javascript/plugins/backbone/backbone.marionette.min.js"></script>
+
+      <!--END Global Javascript-->
+
+      <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+
+      <!--Global CSS-->
+      <link href="public/stylesheet/components-rounded.min.css" rel="stylesheet" type="text/css" />
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+      <link href="public/stylesheet/common.css" rel="stylesheet" type="text/css" />
+      <link href="public/stylesheet/like.css" rel="stylesheet" type="text/css" />
+      <link rel="stylesheet" href= "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+      <!--END Global CSS-->
+
+      <link href="public/stylesheet/bookmark.css" rel="stylesheet" type="text/css" />
 
 
-<body>
-  <div id = "common header" >
-    <h1 class = "col-xs-10 col-lg-offset-1 col-lg-7"> 북마크 </h1>
-  </div>
 
-  <div id ="bookmark_container">
-    <ul id="bookmark_list" class= "col-xs-12 col-sm-12 col-md-12 col-lg-11">
 
-      <li class="bookmark col-xs-12 col-md-3 col-lg-offset-1 col-lg-3">
-        <div class="bookmark_content">
-        </div>
-        <div class="bookmark_del">
-          <button class = "delete_button">✖</button>
-        </div>
-      </li>
-      
-    </ul>
-  </div>
-  <div id="footer">
-    <a href="public/oss_license.html">오픈소스 정보</a>
-  </div>
-</body>
+    </head>
+    <body>
 
-</html>
+    <section>
+
+
+    <div id = "common header" >
+      <h1 class = "col-xs-10 col-lg-offset-1 col-lg-7"> 북마크 </h1>
+    </div>
+    <div id ="bookmark_container">
+      <ul id="bookmark_list" class= "col-xs-12 col-sm-12 col-md-12 col-lg-11">
+
+    <li class="bookmark col-xs-12 col-md-3 col-lg-offset-1 col-lg-3">
+      <div class="bookmark_content">
+      </div>
+      <div class="bookmark_del">
+        <button class = "delete_button">✖</button>
+      </div>
+    </li>
+
+    <li class="bookmark col-xs-12 col-md-3 col-lg-offset-1 col-lg-3">
+      <div class="bookmark_content">
+      </div>
+      <div class="bookmark_del">
+        <button class = "delete_button">✖</button>
+      </div>
+    </li>
+
+    <li class="bookmark col-xs-12 col-md-3 col-lg-offset-1 col-lg-3">
+      <div class="bookmark_content">
+      </div>
+      <div class="bookmark_del">
+        <button class = "delete_button">✖</button>
+      </div>
+    </li>
+
+    <li class="bookmark col-xs-12 col-md-3 col-lg-offset-1 col-lg-3">
+      <div class="bookmark_content">
+      </div>
+      <div class="bookmark_del">
+        <button class = "delete_button">✖</button>
+      </div>
+    </li>
+
+    <li class="bookmark col-xs-12 col-md-3 col-lg-offset-1 col-lg-3">
+      <div class="bookmark_content">
+      </div>
+      <div class="bookmark_del">
+        <button class = "delete_button">✖</button>
+      </div>
+    </li>
+
+    <li class="bookmark col-xs-12 col-md-3 col-lg-offset-1 col-lg-3">
+      <div class="bookmark_content">
+      </div>
+      <div class="bookmark_del">
+        <button class = "delete_button">✖</button>
+      </div>
+    </li>
+
+    <li class="bookmark col-xs-12 col-md-3 col-lg-offset-1 col-lg-3">
+      <div class="bookmark_content">
+      </div>
+      <div class="bookmark_del">
+        <button class = "delete_button">✖</button>
+      </div>
+    </li>
+
+      </ul>
+    </div>
+
+
+    </section>
+
+    <div id = "footer">
+      <a href="/oss_license.html">오픈소스 정보</a>
+    </div>
+
+    </body>
+    <script src="/javascript/common.js"></script>
+    </html>
