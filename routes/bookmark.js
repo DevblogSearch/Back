@@ -17,7 +17,7 @@ router.get('/list', async (req, res) => {
     [err, likes_data] = await preview.to(db.LikeEvent.findAll({
       attributes: ['preview_id'],
       where: {
-        user_id: req.query.id
+        user_id: req.user.id
       },
       limit: pageSize,
       offset: pageSize * (page - 1)
@@ -58,7 +58,7 @@ router.get('/list', async (req, res) => {
 
 
     console.log(previews);
-    res.end();
+    res.json(previews);
   } catch (e) {
     res.status(403).end();
     console.log(e);
