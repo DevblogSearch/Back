@@ -61,26 +61,20 @@ app.post(('/blog'), (req, res) => {
 
 app.get(('/book_mark'), (req, res) => {
   
-  let bookMarkList = `
-    <li class="bookmark col-xs-12 col-md-3 col-lg-offset-1 col-lg-3">
-      <div class="bookmark_content">
-      </div>
-      <div class="bookmark_del">
-        <button class = "delete_button">✖</button>
-      </div>
-    </li>
-  `;
+  let bookmark_resource = '<script src="/javascript/bookmark.js"></script>';
+  bookmark_resource += '<link href="/stylesheet/bookmark.css" rel="stylesheet" type="text/css" />';
+
   let body = `
     <div id = "common header" >
       <h1 class = "col-xs-10 col-lg-offset-1 col-lg-7"> 북마크 </h1>
     </div>
     <div id ="bookmark_container">
       <ul id="bookmark_list" class= "col-xs-12 col-sm-12 col-md-12 col-lg-11">
-        ${bookMarkList}
       </ul>
     </div>
+    <script> appendBookmark(); </script>
   `;
-  res.send(template.HTML('북마크', '', body, '', ''));
+  res.send(template.HTML('북마크', bookmark_resource, body, '', ''));
 
 });
 // catch 404 and forward to error handler
