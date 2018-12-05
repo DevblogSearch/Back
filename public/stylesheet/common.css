@@ -5,6 +5,11 @@ html, body {
   text-align:center;
 }
 
+body {
+  background-color: #f2f2f2;
+}
+
+
 section {
   min-height: 100%;
   padding-bottom: 40px;
