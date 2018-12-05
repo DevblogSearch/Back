@@ -67,6 +67,7 @@ app.get(('/book_mark'), (req, res) => {
   let body = `
     <div id = "common header" >
       <h1 class = "col-xs-10 col-lg-offset-1 col-lg-7"> 북마크 </h1>
+      <button class="btn blue uppercase bold btn-home" onclick="window.location='/';">홈으로</button>
     </div>
     <div id ="bookmark_container">
       <ul id="bookmark_list" class= "col-xs-12 col-sm-12 col-md-12 col-lg-11">

@@ -68,3 +68,9 @@
 body{
   background-color: #f2f2f2;
 }
+
+.btn-home{
+  right: 20px;
+  top: 20px;
+  position: absolute;
+}
