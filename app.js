@@ -74,10 +74,18 @@ app.get(('/bookmark'), async (req, res) => {
       <ul id="bookmark_list" class= "col-xs-12 col-sm-12 col-md-12 col-lg-11">
   `;
   for (elem of previews) {
+    if (elem.image[0] === '/') {
+      elem.image = '/images/Chosung_on_grid_1.png';
+    }
     body += `
       <li class="bookmark col-xs-12 col-md-3 col-lg-offset-1 col-lg-3">
         <div class="bookmark_content">
-          ${elem.title}
+          <img src=${elem.image} height="200px" width="100%">
+          <h2>
+            <a href=${elem.url}>${elem.title}</a>
+          </h2>
+            <p>${elem.description}</p>
+
         </div>
         <div class="bookmark_del">
           <button class = "delete_button">✖</button>
