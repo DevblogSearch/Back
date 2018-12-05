@@ -11,6 +11,7 @@ const queryString = require('query-string');
 const solrClient = require('./lib/solr')();
 const app = express();
 const template = require('./lib/template');
+const bookmark = require('./lib/bookmark');
 
 // Middleware Settings.
 app.use(helmet());
@@ -38,7 +39,6 @@ const searchRouter = require('./routes/search');
 const documentRouter = require('./routes/document');
 const autocomplete = require('./routes/autocomplete');
 const events = require('./routes/events');
-const bookmark = require('./routes/bookmark');
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
@@ -46,7 +46,6 @@ app.use('/search', searchRouter);
 app.use('/document', documentRouter);
 app.use('/autocomplete', autocomplete);
 app.use('/events', events);
-app.use('/bookmark', bookmark);
 
 app.post(('/blog'), (req, res) => {
   db.Blog.findOrCreate({ where: {url: req.body.content } })
@@ -59,30 +58,53 @@ app.post(('/blog'), (req, res) => {
     });
 });
 
-app.get(('/book_mark'), (req, res) => {
-  
-  let bookMarkList = `
-    <li class="bookmark col-xs-12 col-md-3 col-lg-offset-1 col-lg-3">
-      <div class="bookmark_content">
-      </div>
-      <div class="bookmark_del">
-        <button class = "delete_button">✖</button>
-      </div>
-    </li>
-  `;
+app.get(('/bookmark'), async (req, res) => {
+
+  req.query.page = 1;
+  req.query.id = req.user.id;
+
+  let previews = await bookmark.showBookmarkList(req, res);
+  console.log(previews);
+
   let body = `
     <div id = "common header" >
       <h1 class = "col-xs-10 col-lg-offset-1 col-lg-7"> 북마크 </h1>
     </div>
     <div id ="bookmark_container">
       <ul id="bookmark_list" class= "col-xs-12 col-sm-12 col-md-12 col-lg-11">
-        ${bookMarkList}
-      </ul>
-    </div>
   `;
+  for (elem of previews) {
+    body += `
+      <li class="bookmark col-xs-12 col-md-3 col-lg-offset-1 col-lg-3">
+        <div class="bookmark_content">
+          ${elem.title}
+        </div>
+        <div class="bookmark_del">
+          <button class = "delete_button">✖</button>
+        </div>
+     </li>
+    `;
+  }
+
+  body += '</ul></div>';
+
   res.send(template.HTML('북마크', '', body, '', ''));
 
 });
+
+app.get('/bookmark/list', async (req, res) => {
+  try {
+    let previews = await bookmark.showBookmarkList(req, res);
+    console.log(previews);
+    previews = JSON.stringify(previews);
+    res.end(previews);
+  } catch(err) {
+    res.status(403).end();
+    console.log(err);
+  }
+
+});
+
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   next(createError(404));
