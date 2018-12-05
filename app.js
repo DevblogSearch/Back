@@ -59,9 +59,9 @@ app.post(('/blog'), (req, res) => {
 });
 
 app.get(('/bookmark'), async (req, res) => {
-  
   let bookmark_resource = '<script src="/javascript/bookmark.js"></script>';
   bookmark_resource += '<link href="/stylesheet/bookmark.css" rel="stylesheet" type="text/css" />';
+  bookmark_resource += '<script src="javascript/likeEvent.js"></script>';
 
   req.query.page = 1;
   req.query.id = req.user.id;
@@ -76,12 +76,13 @@ app.get(('/bookmark'), async (req, res) => {
     <div id ="bookmark_container">
       <ul id="bookmark_list" class= "col-xs-12 col-sm-12 col-md-12 col-lg-11">
   `;
+  let bookmarkId = 0;
   for (elem of previews) {
     if (elem.image[0] === '/') {
       elem.image = '/images/Chosung_on_grid_1.png';
     }
     body += `
-      <li class="bookmark col-xs-12 col-md-3 col-lg-offset-1 col-lg-3">
+      <li class="bookmark col-xs-12 col-md-3 col-lg-offset-1 col-lg-3" id=${bookmarkId}>
         <div class="bookmark_content">
           <img src=${elem.image} height="200px" width="100%">
           <h3>
@@ -89,13 +90,15 @@ app.get(('/bookmark'), async (req, res) => {
           </h3>
           <div class="bookmark_description">
             ${elem.description}
-          </div> 
+          </div>
+          <div class="bookmark_del">
+            <button class = "delete_button" onclick="removeBookmarkElem('${elem.url}', ${bookmarkId})">✖</button>
+          </div>
         </div>
-        <div class="bookmark_del">
-          <button class = "delete_button">✖</button>
-        </div>
+
      </li>
     `;
+    bookmarkId++;
   }
 
   body += '</ul></div>';
@@ -114,7 +117,6 @@ app.get('/bookmark/list', async (req, res) => {
     res.status(403).end();
     console.log(err);
   }
-
 });
 
 // catch 404 and forward to error handler

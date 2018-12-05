@@ -13,13 +13,25 @@ function likeEvent(user_id, url, selfTag) {
     }
   });
 } else {
+    $.ajax({
+      type: "POST",
+      url: "/events/like",
+      data: {
+        user_id: user_id,
+        url: url
+      }
+    });
+  }
+}
+
+function removeBookmarkElem(url, bookmarkId) {
+  document.getElementById(bookmarkId).remove();
+
   $.ajax({
     type: "POST",
-    url: "/events/like",
+    url: "/events/cancel_like",
     data: {
-      user_id: user_id,
       url: url
     }
   });
-}
 }

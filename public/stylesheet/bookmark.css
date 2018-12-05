@@ -14,7 +14,7 @@
 }
 
 .bookmark_description {
-  height: 40%
+  height: 40px; 
 }
 
 .bookmark_description #title{
