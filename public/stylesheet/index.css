@@ -5,3 +5,19 @@
     padding-left: 0px;
     text-align: left;
 }
+
+#footer{
+    position: absolute;
+    width: 100%;
+}
+
+body{
+    overflow: hidden;
+}
+
+.ui-menu-item{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+    overflow: hidden;
+}

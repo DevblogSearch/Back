@@ -68,6 +68,7 @@ $(document).ready(function() {
             q: req.term
           },
           success: function(data) {
+            data = data.slice(0,7)
             if (isMobile) {
               data = data.slice(0, 5)
             }
