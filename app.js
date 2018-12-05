@@ -8,6 +8,7 @@ const helmet = require('helmet');
 const FileStore = require('session-file-store')(session);
 const db = require('./lib/db');
 const queryString = require('query-string');
+const solrClient = require('./lib/solr')();
 const app = express();
 const template = require('./lib/template');
 
@@ -59,6 +60,7 @@ app.post(('/blog'), (req, res) => {
 });
 
 app.get(('/book_mark'), (req, res) => {
+  
   let bookMarkList = `
     <li class="bookmark col-xs-12 col-md-3 col-lg-offset-1 col-lg-3">
       <div class="bookmark_content">

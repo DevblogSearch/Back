@@ -70,60 +70,70 @@ router.get('/', (req, res, next) => {
       response.push({title:doc.title, url:doc.url, content:snipset.join().trim().replace(/(<([^>]+)>)/ig,"")});
     }
 
-    res.format({
-      'text/html': function() {
-        let searchResult = template.parseSearchResponse(response, q, req.query.start, numFound, req.user);
-        let header = `
+    let header = `
+      <script src="javascript/likeEvent.js"></script>
 
-          <script src="javascript/likeEvent.js"></script>
+      <div id="search-bar-background"></div>
+      <div id="sidebar">
+        <div class="close-sidebar">
+          <button class = "close_button">✖</button>
+        </div>
+        ` + auth.StatusUI(req,res) + `
+      </div>
+      <div id="toggle-btn" class = "visible-xs-block visible-sm-block" >
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div id ="overlay"></div>
 
-          <div id="search-bar-background"></div>
-          <div id="sidebar">
-            <div class="close-sidebar">
-              <button class = "close_button">✖</button>
+      <div class="search-page search-content-2">
+        <div class="search-bar" style="margin-bottom:0px;">
+          <div class="row">
+            <div id ="logo-container" class = "visible-lg-block visible-md-block">
+              <a href="/">
+                <img width="130px" width="55px" id="logo-img" src="/images/Chosung_on_grid_1.png" alt="logo">
+              </a>
             </div>
-            ` + auth.StatusUI(req,res) + `
-          </div>
-          <div id="toggle-btn" class = "visible-xs-block visible-sm-block" >
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-          <div id ="overlay"></div>
-
-          <div class="search-page search-content-2">
-            <div class="search-bar" style="margin-bottom:0px;">
-              <div class="row">
-                <div id ="logo-container" class = "visible-lg-block visible-md-block">
-                  <a href="/">
-                    <img width="130px" width="55px" id="logo-img" src="/images/Chosung_on_grid_1.png" alt="logo">
-                  </a>
-                </div>
-                <div class="reactive-div col-xs-11 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-0 col-lg-5 col-lg-offset-0">
-                  <div class="input-group">
-                    <form action="/search" method="GET" id="form1">
-                      <input id="inputSearch" type = "text" class="form-control" placeholder="검색어를 입력하세요" value="${q}" autocomplete="off" maxlength="100" name="q">
-                      <input id="page" type="hidden" name="start" value="1">
-                      <input type="hidden" name="n" value="10">
-                    </form>
-                    <span class="input-group-btn">
-                      <button form="form1" class="btn blue uppercase bold">검색</button>
-                    </span>
-                  </div>
-                </div>
-                <div id="login" class = "visible-lg-block visible-md-block " >
-                ` + auth.StatusUI(req,res) + `
-                </div>
+            <div class="reactive-div col-xs-11 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-0 col-lg-5 col-lg-offset-0">
+              <div class="input-group">
+                <form action="/search" method="GET" id="form1">
+                  <input id="inputSearch" type = "text" class="form-control" placeholder="검색어를 입력하세요" value="${q}" autocomplete="off" maxlength="100" name="q">
+                  <input id="page" type="hidden" name="start" value="1">
+                  <input type="hidden" name="n" value="10">
+                </form>
+                <span class="input-group-btn">
+                  <button form="form1" class="btn blue uppercase bold">검색</button>
+                </span>
               </div>
+            </div>
+            <div id="login" class = "visible-lg-block visible-md-block " >
+            ` + auth.StatusUI(req,res) + `
             </div>
           </div>
         </div>
-        `;
-        let local_library =`
-          <link href="/stylesheet/search.min.css" rel="stylesheet" type="text/css" />
-        `;
-        let html = template.HTML('나랏말싸미 - ' + q, local_library,'', header, searchResult);
-        res.send(html);
+      </div>
+    </div>
+    `;
+    
+    let local_library =`
+      <link href="/stylesheet/search.min.css" rel="stylesheet" type="text/css" />
+    `;
+    res.format({
+      'text/html': function() {
+        if (!!req.user) {
+          db.LikeEvent.findAll({
+            where: { user_id: req.user.id }
+          }).then(likes => {
+            let searchResult = template.parseSearchResponse(response, q, req.query.start, numFound, req.user, likes);
+            let html = template.HTML('나랏말싸미 - ' + q, local_library, '', header, searchResult);
+            res.send(html);
+          });
+        } else {
+          let searchResult = template.parseSearchResponse(response, q, req.query.start, numFound, req.user, []);
+          let html = template.HTML('나랏말싸미 - ' + q, local_library, '', header, searchResult, []);
+          res.send(html);
+        }
       },
       'application/json': function(){
         res.json(response);
