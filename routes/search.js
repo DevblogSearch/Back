@@ -22,11 +22,14 @@ const router = express.Router();
   qstr += `content:"${q}"~100^4.0 `
 */
 function buildQueryString(q) {
-  qstr = `_val_:"if(query($q1), field(boost), 0)"`
   qstr = `title:"${q}"~100^5.0 OR `
-  qstr += `title:"${q}"^7.0 OR `
-  qstr += `content:"${q}"^6.0 OR `
-  qstr += `content:"${q}"~100^4.0 OR `
+  qstr += `content:"${q}"~100^4.0 `
+
+  // qstr = `_val_:"if(query($q1), field(boost), 0)"`
+  // qstr = `title:"${q}"~100^5.0 OR `
+  // qstr += `title:"${q}"^7.0 OR `
+  // qstr += `content:"${q}"^6.0 OR `
+  // qstr += `content:"${q}"~100^4.0 OR `
   console.log(qstr);
   return qstr;
 

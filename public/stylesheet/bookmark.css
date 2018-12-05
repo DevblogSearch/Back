@@ -14,7 +14,7 @@
 }
 
 .bookmark_description {
-  height: 40%
+  height: 40px; 
 }
 
 .bookmark_description #title{
@@ -32,13 +32,13 @@
 
 #bookmark_container .bookmark {
 	float: left;
-    margin-top: 50px;
-    height: 330px;
-    padding: 0 !important;
-    background-color: white;
-    border-radius: 3px;
-    box-shadow: 0.5px 0.5px 0.5px 0.5px #999;
-    cursor: pointer;
+  margin-top: 50px;
+  height: 330px;
+  padding: 0 !important;
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: 0.5px 0.5px 0.5px 0.5px #999;
+  cursor: pointer;
 }
 
 #bookmark_container .bookmark_content {

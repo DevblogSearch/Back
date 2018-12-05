@@ -61,11 +61,11 @@ router.post('/like', async (req, res) => {
 
 router.post('/cancel_like', (req, res) => {
   console.log(req.body);
-  console.log(`cancel like events user_id : ${req.body.user_id}`);
+  console.log(`cancel like events user_id : ${req.user.id}`);
   console.log(`cancel like events url : ${req.body.url}`);
 
   db.User.findOne({
-    where: { id: req.body.user_id }
+    where: { id: req.user.id }
   }).then((user) => {
     db.LikeEvent.findOne({
       where: {user_id: user.id, url: req.body.url}
