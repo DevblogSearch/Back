@@ -33,3 +33,13 @@
 .search-item {
   list-style-type: none;
 }
+
+#sidebar .btn-home{
+    width: 80%;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#sidebar button{
+    margin-bottom: 10px;
+}

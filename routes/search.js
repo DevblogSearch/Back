@@ -88,6 +88,8 @@ router.get('/', (req, res, next) => {
         <div class="close-sidebar">
           <button class = "close_button">✖</button>
         </div>
+        <button class="btn blue uppercase bold btn-home" onclick="" style="
+        ">홈으로</button>
         ` + auth.StatusUI(req,res) + `
       </div>
       <div id="toggle-btn" class = "visible-xs-block visible-sm-block" >
