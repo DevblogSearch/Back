@@ -88,7 +88,7 @@ router.get('/', (req, res, next) => {
         <div class="close-sidebar">
           <button class = "close_button">✖</button>
         </div>
-        <button class="btn blue uppercase bold btn-home" onclick="" style="
+        <button class="btn blue uppercase bold btn-home" onclick="window.location='/';" style="
         ">홈으로</button>
         ` + auth.StatusUI(req,res) + `
       </div>
